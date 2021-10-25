@@ -29,19 +29,16 @@ void main()
 				}
 				if (event.key.code == Keyboard::Down)
 					mainMenu.MoveDown();
-				break;
+					break;
 			}
 			if (event.key.code == Keyboard::Return) {
 				//tutaj mamy nasze opcje. po ich wyborze przechodzimy do ich zawartosci. Graj wiadomo, opcje no tu damy glosnosc aplikacji moze jeszcze nick wybor czolgu czy cos...
 				//w tworcach sie da imie i nazwisko plus kto co robil taki credits z filmu tylko bez xd
-				RenderWindow Graj(VideoMode(960, 720), "Gra_Tanki");
-				RenderWindow Opcje(VideoMode(960, 720), "Opcje");
-				RenderWindow Twórcy(VideoMode(960, 720), "Twórcy");
-
 
 				int x = mainMenu.MainMenuPressed();
 				if (x == 0)
 				{
+					RenderWindow Graj(VideoMode(960, 720), "Gra_Tanki");
 					while (Graj.isOpen())// tu jest napisane co dokladnie sie dzieje przy wyborze opcji graj
 					{
 						Event aevent;
@@ -59,8 +56,6 @@ void main()
 								}
 							}
 						}
-						Opcje.close();
-						Twórcy.close();
 						Graj.clear();
 						Graj.display();
 					}
@@ -68,6 +63,7 @@ void main()
 				}
 				if (x == 1)
 				{
+					RenderWindow Opcje(VideoMode(960, 720), "Opcje");
 					while (Opcje.isOpen())// tu jest napisane co dokladnie sie dzieje przy wyborze opcji opcje
 					{
 						Event aevent;
@@ -84,17 +80,14 @@ void main()
 								}
 							}
 						}
-						Graj.close();
 						Opcje.clear();
-						Twórcy.close();
-
-
 						Opcje.display();
 
 					}
 				}
 				if (x == 2)
 				{
+					RenderWindow Twórcy(VideoMode(960, 720), "Twórcy");
 					while (Twórcy.isOpen())// tu jest napisane co dokladnie sie dzieje przy wyborze opcji Twórcy
 					{
 						Event aevent;
@@ -111,10 +104,7 @@ void main()
 								}
 							}
 						}
-						Graj.close();// zamyka 
-						Opcje.clear();//czysci
 						Twórcy.clear();//czysci
-
 						Twórcy.display();//otwiera
 					}
 				}

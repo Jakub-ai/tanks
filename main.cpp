@@ -5,8 +5,34 @@ using namespace std;
 void main()
 {
 	//Tworzenie g³ownego okna 
-	RenderWindow Menu(VideoMode(960, 720), "Main Menu", Style::Default);
+	RenderWindow Menu(VideoMode(1440, 900), "Main Menu");
 	MainMenu mainMenu(Menu.getSize().x, Menu.getSize().y);
+	//Ustawienie t³a do MainMenu
+	RectangleShape background;
+	background.setSize(Vector2f(1440, 900));
+	Texture Maintexture;
+	Maintexture.loadFromFile("Texture/background.png");
+	background.setTexture(&Maintexture);
+
+	//zdjecie do gry
+	RectangleShape Pbackground;
+	Pbackground.setSize(Vector2f(1440, 900));
+	Texture back_texture;
+	back_texture.loadFromFile("Texture/background.png");
+	Pbackground.setTexture(&back_texture);
+
+	//zdjecie do opcji
+	RectangleShape Obackground;
+	Obackground.setSize(Vector2f(1440, 900));
+	Texture Optiontexture;
+	Optiontexture.loadFromFile("Texture/background.png");
+	Obackground.setTexture(&Optiontexture);
+	//Tworcy
+	RectangleShape ABbackground;
+	ABbackground.setSize(Vector2f(1440, 900));
+	Texture Abouttexture;
+	Abouttexture.loadFromFile("Texture/background.png");
+	ABbackground.setTexture(&Abouttexture);
 
 
 	// kiedy okno menu jest wyswietlane
@@ -38,7 +64,7 @@ void main()
 				int x = mainMenu.MainMenuPressed();
 				if (x == 0)
 				{
-					RenderWindow Graj(VideoMode(960, 720), "Gra_Tanki");
+					RenderWindow Graj(VideoMode(1440, 900), "Gra_Tanki");
 					while (Graj.isOpen())// tu jest napisane co dokladnie sie dzieje przy wyborze opcji graj
 					{
 						Event aevent;
@@ -57,13 +83,14 @@ void main()
 							}
 						}
 						Graj.clear();
+						Graj.draw(Pbackground);
 						Graj.display();
 					}
 
 				}
 				if (x == 1)
 				{
-					RenderWindow Opcje(VideoMode(960, 720), "Opcje");
+					RenderWindow Opcje(VideoMode(1440, 900), "Opcje");
 					while (Opcje.isOpen())// tu jest napisane co dokladnie sie dzieje przy wyborze opcji opcje
 					{
 						Event aevent;
@@ -81,13 +108,14 @@ void main()
 							}
 						}
 						Opcje.clear();
+						Opcje.draw(Obackground);
 						Opcje.display();
 
 					}
 				}
 				if (x == 2)
 				{
-					RenderWindow Twórcy(VideoMode(960, 720), "Twórcy");
+					RenderWindow Twórcy(VideoMode(1440, 900), "Twórcy");
 					while (Twórcy.isOpen())// tu jest napisane co dokladnie sie dzieje przy wyborze opcji Twórcy
 					{
 						Event aevent;
@@ -105,6 +133,7 @@ void main()
 							}
 						}
 						Twórcy.clear();//czysci
+						Twórcy.draw(ABbackground);
 						Twórcy.display();//otwiera
 					}
 				}
@@ -115,6 +144,7 @@ void main()
 		}
 	}
 	Menu.clear();
+	Menu.draw(background);
 	mainMenu.draw(Menu);
 	Menu.display();
 }

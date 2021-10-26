@@ -22,13 +22,13 @@ MainMenu::MainMenu(float width, float heigh)
 	// Twórcy
 	mainMenu[2].setFont(font);
 	mainMenu[2].setFillColor(Color::Red);
-	mainMenu[2].setString("Twórcy");
+	mainMenu[2].setString("Tworcy");
 	mainMenu[2].setCharacterSize(70);
 	mainMenu[2].setPosition(400, 400);
 	//Wyjœcie
 	mainMenu[3].setFont(font);
 	mainMenu[3].setFillColor(Color::Blue);
-	mainMenu[3].setString("Wyjœcie");
+	mainMenu[3].setString("Wyjscie");
 	mainMenu[3].setCharacterSize(70);
 	mainMenu[3].setPosition(400, 500);
 

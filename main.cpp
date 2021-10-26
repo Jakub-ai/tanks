@@ -142,9 +142,10 @@ void main()
 				break;
 			}
 		}
+		Menu.clear();
+		Menu.draw(background);
+		mainMenu.draw(Menu);
+		Menu.display();
 	}
-	Menu.clear();
-	Menu.draw(background);
-	mainMenu.draw(Menu);
-	Menu.display();
+	
 }

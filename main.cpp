@@ -1,8 +1,9 @@
 #include "mainMenu.h"
+#include "game.h"
 #include <SFML/Graphics.hpp>
 using namespace sf;
 using namespace std;
-void main()
+int main()
 {
 	//Tworzenie g³ownego okna 
 	RenderWindow Menu(VideoMode(1440, 900), "Main Menu");
@@ -35,6 +36,10 @@ void main()
 	ABbackground.setTexture(&Abouttexture);
 
 
+	//gra
+	game gra;
+
+
 	// kiedy okno menu jest wyswietlane
 	while (Menu.isOpen())
 	{
@@ -64,6 +69,15 @@ void main()
 				int x = mainMenu.MainMenuPressed();
 				if (x == 0)
 				{
+					Menu.close();
+					gra.inicjalizacja_okna();
+					while (gra.running())
+					{
+						gra.update();
+						gra.rysuj();
+					}
+
+					/*
 					RenderWindow Graj(VideoMode(1440, 900), "Gra_Tanki");
 					while (Graj.isOpen())// tu jest napisane co dokladnie sie dzieje przy wyborze opcji graj
 					{
@@ -86,6 +100,8 @@ void main()
 						Graj.draw(Pbackground);
 						Graj.display();
 					}
+					*/
+					
 
 				}
 				if (x == 1)

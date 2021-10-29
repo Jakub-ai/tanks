@@ -8,6 +8,7 @@ private:
 	sf::Event gevent;
 
 	Czolg* gracz1;
+	Czolg* gracz2;
 
 	void inicjalizacja_zmiennych();
 	void inicjalizacja_gracza1();

@@ -10,6 +10,7 @@ void game::inicjalizacja_zmiennych()
 void game::inicjalizacja_gracza1()
 {
 	this->gracz1 = new Czolg();
+	this->gracz2 = new Czolg();
 }
 
 void game::inicjalizacja_okna()
@@ -38,11 +39,15 @@ void game::updateEvents()
 					this->gracz1->rotacja(1.f);
 				if (this->gevent.key.code == sf::Keyboard::A)
 					this->gracz1->rotacja(-1.f);
+				if (this->gevent.key.code == sf::Keyboard::Right)
+					this->gracz2->rotacja(1.f);
+				if (this->gevent.key.code == sf::Keyboard::Left)
+					this->gracz2->rotacja(-1.f);
 				break;
 			}
 		}
 
-		//ruch czolgu
+		//ruch czolgu1
 
 		//do przodu
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && this->gracz1->jaki_kat() == 0)
@@ -79,6 +84,44 @@ void game::updateEvents()
 		{
 			this->gracz1->movement(1.f, 0.f);
 		}
+
+		//ruch czolgu2
+
+		//do przodu
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && this->gracz2->jaki_kat() == 0)
+		{
+			this->gracz2->movement(0.f, -1.f);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && this->gracz2->jaki_kat() == 90)
+		{
+			this->gracz2->movement(1.f, 0.f);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && this->gracz2->jaki_kat() == 180)
+		{
+			this->gracz2->movement(0.f, 1.f);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && this->gracz2->jaki_kat() == 270)
+		{
+			this->gracz2->movement(-1.f, 0.f);
+		}
+
+		//do tylu
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && this->gracz2->jaki_kat() == 0)
+		{
+			this->gracz2->movement(0.f, 1.f);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && this->gracz2->jaki_kat() == 90)
+		{
+			this->gracz2->movement(-1.f, 0.f);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && this->gracz2->jaki_kat() == 180)
+		{
+			this->gracz2->movement(0.f, -1.f);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && this->gracz2->jaki_kat() == 270)
+		{
+			this->gracz2->movement(1.f, 0.f);
+		}
 }
 
 void game::update()
@@ -90,6 +133,7 @@ void game::rysuj()
 {
 	this->window->clear();
 	this->gracz1->rysuj(*this->window);
+	this->gracz2->rysuj(*this->window);
 
 
 	this->window->display();

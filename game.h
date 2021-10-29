@@ -1,14 +1,16 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include <iostream>
+#include "Czolg.h"
+
 class game
 {
 private:
 	sf::RenderWindow* window;
 	sf::Event gevent;
 
+	Czolg* gracz1;
+
 	void inicjalizacja_zmiennych();
-	
+	void inicjalizacja_gracza1();
 
 
 public:

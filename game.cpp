@@ -7,9 +7,16 @@ void game::inicjalizacja_zmiennych()
 	this->window = nullptr;
 }
 
+void game::inicjalizacja_gracza1()
+{
+	this->gracz1 = new Czolg();
+}
+
 void game::inicjalizacja_okna()
 {
 	this->window = new sf::RenderWindow(sf::VideoMode(1440, 900), "Gra Tanki", sf::Style::Titlebar | sf::Style::Close);
+	this->window->setFramerateLimit(60);
+	this->window->setVerticalSyncEnabled(false);
 }
 
 void game::updateEvents()
@@ -26,7 +33,51 @@ void game::updateEvents()
 				if (this->gevent.key.code == sf::Keyboard::Escape)
 					this->window->close();
 				break;
+			case sf::Event::KeyReleased:
+				if (this->gevent.key.code == sf::Keyboard::D)
+					this->gracz1->rotacja(1.f);
+				if (this->gevent.key.code == sf::Keyboard::A)
+					this->gracz1->rotacja(-1.f);
+				break;
 			}
+		}
+
+		//ruch czolgu
+
+		//do przodu
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && this->gracz1->jaki_kat() == 0)
+		{
+			this->gracz1->movement(0.f, -1.f);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && this->gracz1->jaki_kat() == 90)
+		{
+			this->gracz1->movement(1.f, 0.f);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && this->gracz1->jaki_kat() == 180)
+		{
+			this->gracz1->movement(0.f, 1.f);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && this->gracz1->jaki_kat() == 270)
+		{
+			this->gracz1->movement(-1.f, 0.f);
+		}
+
+		//do tylu
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && this->gracz1->jaki_kat() == 0)
+		{
+			this->gracz1->movement(0.f, 1.f);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && this->gracz1->jaki_kat() == 90)
+		{
+			this->gracz1->movement(-1.f, 0.f);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && this->gracz1->jaki_kat() == 180)
+		{
+			this->gracz1->movement(0.f, -1.f);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && this->gracz1->jaki_kat() == 270)
+		{
+			this->gracz1->movement(1.f, 0.f);
 		}
 }
 
@@ -37,7 +88,10 @@ void game::update()
 
 void game::rysuj()
 {
-	this->window->clear(sf::Color(255, 0, 0, 255));
+	this->window->clear();
+	this->gracz1->rysuj(*this->window);
+
+
 	this->window->display();
 }
 
@@ -48,12 +102,14 @@ void game::rysuj()
 game::game()
 {
 	this->inicjalizacja_zmiennych();
+	this->inicjalizacja_gracza1();
 	//this->inicjalizacja_okna();
 }
 
 game::~game()
 {
 	delete this->window;
+	delete this->gracz1;
 }
 
 const bool game::running() const

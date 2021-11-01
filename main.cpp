@@ -1,6 +1,8 @@
 #include "mainMenu.h"
 #include "game.h"
+#include "Opcje.h"
 #include <SFML/Graphics.hpp>
+
 using namespace sf;
 using namespace std;
 int main()
@@ -38,6 +40,9 @@ int main()
 
 	//gra
 	game gra;
+	//opcje
+	Opcje opcje;
+
 
 
 	// kiedy okno menu jest wyswietlane
@@ -77,36 +82,21 @@ int main()
 						gra.rysuj();
 					}
 
-					/*
-					RenderWindow Graj(VideoMode(1440, 900), "Gra_Tanki");
-					while (Graj.isOpen())// tu jest napisane co dokladnie sie dzieje przy wyborze opcji graj
-					{
-						Event aevent;
-						while (Graj.pollEvent(aevent))
-						{
-							if (aevent.type == Event::Closed)
-							{
-								Graj.close();
-							}
-							if (aevent.type == Event::KeyPressed)
-							{
-								if (aevent.key.code == Keyboard::Escape)
-								{
-									Graj.close();
-								}
-							}
-						}
-						Graj.clear();
-						Graj.draw(Pbackground);
-						Graj.display();
-					}
-					*/
+		
 					
 
 				}
 				if (x == 1)
 				{
-					RenderWindow Opcje(VideoMode(1440, 900), "Opcje");
+
+					Menu.close();
+					opcje.inicjalizacja_oknaO();
+					while (opcje.working())
+					{
+						opcje.updateO();
+						opcje.rysujO();
+					}
+					/*RenderWindow Opcje(VideoMode(1440, 900), "Opcje");
 					while (Opcje.isOpen())// tu jest napisane co dokladnie sie dzieje przy wyborze opcji opcje
 					{
 						Event aevent;
@@ -126,8 +116,9 @@ int main()
 						Opcje.clear();
 						Opcje.draw(Obackground);
 						Opcje.display();
-
+						
 					}
+					*/
 				}
 				if (x == 2)
 				{

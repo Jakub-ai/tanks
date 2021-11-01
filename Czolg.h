@@ -11,9 +11,11 @@ private:
 
 	float MoveSpeed;
 	float kat_obrotu;
+	std::string Nick;
 
 	void inicjalizacja_tekstur();
 	void inicjalizacja_sprite();
+
 public:
 	//konstruktor i destruktor
 	Czolg();

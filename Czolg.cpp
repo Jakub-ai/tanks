@@ -33,7 +33,11 @@ Czolg::~Czolg()
 {
 
 }
-/*
+const sf::FloatRect Czolg::pozycja() const
+{
+	return this->sprite.getGlobalBounds();
+}
+
 void Czolg::zmien_pozycje(const sf::Vector2f position)
 {
 	this->sprite.setPosition(position);
@@ -43,7 +47,7 @@ void Czolg::zmien_pozycje(const float x, const float y)
 {
 	this->sprite.setPosition(x, y);
 }
-*/
+
 //metody public 
 void Czolg::movement(const float kierX, const float kierY)
 {

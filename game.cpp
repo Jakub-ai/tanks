@@ -215,21 +215,22 @@ void game::update()
 {
 	this->updateEvents();
 
-	//this->kolizje();
+	this->kolizje();
 }
 
 void game::updateMapy()
 {
 }
-/*
+
 void game::kolizje()
 {
 	if (this->gracz1->pozycja().left <= 0.f)
 	{
-		this->gracz1->zmien_pozycje(0.f, this->gracz1->pozycja().top);
+		this->gracz1->zmien_pozycje(50.f, 50.f);
+		std::cout << this->gracz1->pozycja().top;
 	}
 }
-*/
+
 void game::rysowanie_mapki()
 {
 	this->window->draw(this->map_bg);

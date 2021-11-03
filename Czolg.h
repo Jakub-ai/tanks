@@ -22,9 +22,9 @@ public:
 	Czolg();
 	virtual ~Czolg();
 
-	//const sf::FloatRect pozycja() const;
+	const sf::FloatRect pozycja() const;
 
-	//void zmien_pozycje(const sf::Vector2f position);
+	void zmien_pozycje(const sf::Vector2f position);
 	void zmien_pozycje(const float x, const float y);
 
 	//metody

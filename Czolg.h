@@ -25,6 +25,7 @@ public:
 	void movement(const float kierX, const float kierY);
 	void rotacja(const float kat_obrotu);
 	int jaki_kat();
+	void kolizja();
 	void update();
 	void rysuj(sf::RenderTarget& target);
 };

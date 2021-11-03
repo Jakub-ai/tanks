@@ -6,12 +6,21 @@ class game
 private:
 	sf::RenderWindow* window;
 	sf::Event gevent;
+	
+
+	//mapa
+	sf::Sprite map_bg;
+	sf::Texture map_txt;
+
 
 	Czolg* gracz1;
 	Czolg* gracz2;
 
+
+	void inicjalizacja_mapy();
 	void inicjalizacja_zmiennych();
 	void inicjalizacja_gracza1();
+	void rysuj_mapke();
 
 
 public:
@@ -24,8 +33,10 @@ public:
 
 	//metody
 	void updateEvents();
-	void update();
+	void update(); 
+	void rysowanie_mapki();
 	void rysuj();
+	
 	void inicjalizacja_okna();
 };
 

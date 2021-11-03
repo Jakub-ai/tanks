@@ -23,7 +23,7 @@ void Czolg::inicjalizacja_sprite()
 Czolg::Czolg()
 {
 	this->MoveSpeed = 2.f;
-	this->kat_obrotu = 90.f;
+	this->kat_obrotu = 45.f;
 
 	this->inicjalizacja_tekstur();
 	this->inicjalizacja_sprite();
@@ -50,9 +50,28 @@ int Czolg::jaki_kat()
 {
 	return this->sprite.getRotation();
 }
+/*
+void Czolg::kolizja()
+{ 
+	sf::FloatRect pozycja = this->sprite.getGlobalBounds();
+	//lewa strona
+	if (pozycja.left <= 0.f)
+		this->sprite.setPosition(0.f, pozycja.top);
+	//prawa strona
+	if (pozycja.left + pozycja.width >= 1440.f)
+		this->sprite.setPosition(1440.f - pozycja.width, pozycja.top);
 
+	//gora
+	if (pozycja.top <= 0.f)
+		this->sprite.setPosition(pozycja.left, 0.f);
+	//dol
+	if (pozycja.left + pozycja.width >= 900.f)
+		this->sprite.setPosition(pozycja.left, 900.f - pozycja.height);
+}
+*/
 void Czolg::update()
 {
+	//this->kolizja();
 }
 
 void Czolg::rysuj(sf::RenderTarget& target)

@@ -14,9 +14,9 @@ void Czolg::inicjalizacja_tekstur()
 void Czolg::inicjalizacja_sprite()
 {
 	this->sprite.setTexture(this->teksturka);
-	this->sprite.setScale(0.25f, 0.25f);
+	//this->sprite.setScale(0.25f, 0.25f);
 	this->sprite.setPosition(100.f, 100.f);
-	this->sprite.setOrigin(100.f, 100.f);
+	this->sprite.setOrigin(37.f, 38.f);
 }
 
 //konstrukor i destruktor
@@ -33,7 +33,17 @@ Czolg::~Czolg()
 {
 
 }
+/*
+void Czolg::zmien_pozycje(const sf::Vector2f position)
+{
+	this->sprite.setPosition(position);
+}
 
+void Czolg::zmien_pozycje(const float x, const float y)
+{
+	this->sprite.setPosition(x, y);
+}
+*/
 //metody public 
 void Czolg::movement(const float kierX, const float kierY)
 {

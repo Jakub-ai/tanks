@@ -34,6 +34,8 @@ public:
 	//metody
 	void updateEvents();
 	void update(); 
+	void updateMapy();
+	void kolizje();
 	void rysowanie_mapki();
 	void rysuj();
 	

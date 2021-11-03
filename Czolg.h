@@ -8,6 +8,7 @@ class Czolg
 private:
 	sf::Sprite sprite;
 	sf::Texture teksturka;
+	
 
 	float MoveSpeed;
 	float kat_obrotu;
@@ -20,6 +21,11 @@ public:
 	//konstruktor i destruktor
 	Czolg();
 	virtual ~Czolg();
+
+	//const sf::FloatRect pozycja() const;
+
+	//void zmien_pozycje(const sf::Vector2f position);
+	void zmien_pozycje(const float x, const float y);
 
 	//metody
 	void movement(const float kierX, const float kierY);

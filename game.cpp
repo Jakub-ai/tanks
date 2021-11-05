@@ -224,11 +224,61 @@ void game::updateMapy()
 
 void game::kolizje()
 {
-	if (this->gracz1->pozycja().left <= 0.f)
+	//lewa strona
+	if (this->gracz1->pozycja().left < 0.f)
 	{
-		this->gracz1->zmien_pozycje(50.f, 50.f);
-		std::cout << this->gracz1->pozycja().top;
+		this->gracz1->zmien_pozycje(38.f, this->gracz1->pozycja().top+38);
+		std::cout <<"Y pos: " << this->gracz1->pozycja().top<<std::endl;
+
 	}
+	if (this->gracz2->pozycja().left < 0.f)
+	{
+		this->gracz2->zmien_pozycje(38.f, this->gracz2->pozycja().top + 38);
+		std::cout << "Y pos: " << this->gracz2->pozycja().top << std::endl;
+
+	}
+	//prawa strona
+	if (this->gracz1->pozycja().left-38 > 1160.f)
+	{
+		this->gracz1->zmien_pozycje(1236.f, this->gracz1->pozycja().top + 37);
+		std::cout << "Y pos: " << this->gracz1->pozycja().top << std::endl;
+
+	}
+	if (this->gracz2->pozycja().left - 38 > 1160.f)
+	{
+		this->gracz2->zmien_pozycje(1236.f, this->gracz2->pozycja().top + 37);
+		std::cout << "Y pos: " << this->gracz2->pozycja().top << std::endl;
+
+	}
+	
+	//gora
+	if (this->gracz1->pozycja().top - 80 < 0.f)
+	{
+		this->gracz1->zmien_pozycje(this->gracz1->pozycja().left + 37, 118.f);
+		std::cout << "Y pos: " << this->gracz1->pozycja().left << std::endl;
+
+	}
+	if (this->gracz2->pozycja().top - 80  < 0.f)
+	{
+		this->gracz2->zmien_pozycje(this->gracz2->pozycja().left+37, 118.f);
+		std::cout << "Y pos: " << this->gracz2->pozycja().left << std::endl;
+
+	}
+
+	//dol
+	if (this->gracz1->pozycja().top + 38 > 830.f)
+	{
+		this->gracz1->zmien_pozycje(this->gracz1->pozycja().left + 38, 830.f);
+		std::cout << "Y pos: " << this->gracz1->pozycja().left << std::endl;
+
+	}
+	if (this->gracz2->pozycja().top + 38 > 830.f)
+	{
+		this->gracz2->zmien_pozycje(this->gracz2->pozycja().left + 38, 830.f);
+		std::cout << "Y pos: " << this->gracz2->pozycja().left << std::endl;
+
+	}
+
 }
 
 void game::rysowanie_mapki()
@@ -242,6 +292,7 @@ void game::rysuj()
 	this->rysowanie_mapki();
 	this->gracz1->rysuj(*this->window);
 	this->gracz2->rysuj(*this->window);
+	//std::cout << "Y pos: " << this->gracz1->pozycja().top << std::endl;
 
 
 	this->window->display();

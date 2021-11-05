@@ -15,7 +15,7 @@ void Czolg::inicjalizacja_sprite()
 {
 	this->sprite.setTexture(this->teksturka);
 	//this->sprite.setScale(0.25f, 0.25f);
-	this->sprite.setPosition(100.f, 100.f);
+	this->sprite.setPosition(300.f, 300.f);
 	this->sprite.setOrigin(37.f, 38.f);
 }
 
@@ -57,7 +57,7 @@ void Czolg::movement(const float kierX, const float kierY)
 void Czolg::rotacja(const float kierunek)
 {
 	this->sprite.rotate(this->kat_obrotu*kierunek);
-	std::cout << this->sprite.getRotation() << std::endl;
+	//std::cout << this->sprite.getRotation() << std::endl;
 }
 
 int Czolg::jaki_kat()

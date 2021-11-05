@@ -1,6 +1,7 @@
 #include "Opcje.h"
 #include "Czolg.h"
-
+#include "mainMenu.h"
+#include <SFML/Graphics.hpp>
 
 void Opcje::inicjalizacja_zmiennych()
 {
@@ -14,8 +15,15 @@ const bool Opcje::working() const
 
 Opcje::Opcje()
 {
-	this->inicjalizacja_zmiennych();
-
+	/*this->inicjalizacja_zmiennych();
+	if (!font.loadFromFile("Fonts/AlexandriaFLF.ttf")) {
+		cout << "No Font HERE !!!";
+	}
+	opcje[0].setFont(font);
+	opcje[0].setFillColor(Color::White);
+	opcje[0].setString("Sound");
+	opcje[0].setCharacterSize(70);
+	opcje[0].setPosition(400, 200);*/
 }
 
 Opcje::~Opcje()
@@ -66,3 +74,4 @@ void Opcje::zmianaNicku()
 {
 
 }
+

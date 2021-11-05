@@ -46,8 +46,10 @@ int main()
 
 
 	// kiedy okno menu jest wyswietlane
+	mainMenu.Sound();
 	while (Menu.isOpen())
 	{
+		
 		Event event;
 		while
 			(Menu.pollEvent(event))
@@ -55,6 +57,7 @@ int main()
 			if (event.type == Event::Closed)
 			{
 				Menu.close();
+				mainMenu.EndMusic();
 			}
 			if (event.type == Event::KeyReleased)
 			{
@@ -75,6 +78,7 @@ int main()
 				if (x == 0)
 				{
 					Menu.close();
+					mainMenu.EndMusic();
 					gra.inicjalizacja_okna();
 					while (gra.running())
 					{
@@ -90,6 +94,7 @@ int main()
 				{
 
 					Menu.close();
+					mainMenu.EndMusic();
 					opcje.inicjalizacja_oknaO();
 					while (opcje.working())
 					{
@@ -146,6 +151,7 @@ int main()
 				}
 				if (x == 3)			//zamykamy menu
 					Menu.close();
+				mainMenu.EndMusic();
 				break;
 			}
 		}

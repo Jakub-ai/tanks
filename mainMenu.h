@@ -1,4 +1,6 @@
 #pragma once
+#include <SFML/Audio/SoundBuffer.hpp>
+#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
 using namespace std;
@@ -14,6 +16,12 @@ public:
 	void draw(RenderWindow& window);
 	void MoveUp();
 	void MoveDown();
+	void Sound();
+	void Buffer();
+	void EndMusic();
+	sf::SoundBuffer buffer;
+	sf::Sound sound;
+
 
 	int MainMenuPressed() {
 		return MainMenuSelected;

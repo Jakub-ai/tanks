@@ -1,4 +1,5 @@
 #include "mainMenu.h"
+
 MainMenu::MainMenu(float width, float heigh)
 {
 	if (!font.loadFromFile("Fonts/AlexandriaFLF.ttf")) {
@@ -75,3 +76,26 @@ void MainMenu::MoveDown()
 
 	}
 }
+
+void MainMenu::Sound()
+{
+	
+	if (!buffer.loadFromFile("Sound/Test.wav"))
+		std::cout << "niezaladowano dzwieku";
+	
+	this->Buffer();
+	
+	sound.play();
+}
+
+void MainMenu::Buffer()
+{
+	sound.setBuffer(buffer);
+}
+
+void MainMenu::EndMusic()
+{
+	sound.stop();
+	sound.resetBuffer(); 
+}
+

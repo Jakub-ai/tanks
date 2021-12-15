@@ -5,7 +5,11 @@
 
 void Czolg::inicjalizacja_tekstur()
 {
-	if (!this->teksturka.loadFromFile("Texture/czolg1.png"))
+	if (!this->teksturka1.loadFromFile("Texture/czolg1.png"))
+	{
+		std::cout << "Blad tekstury czolgu! czolg.h" << std::endl;
+	}
+	if (!this->teksturka2.loadFromFile("Texture/czolg1.png"))
 	{
 		std::cout << "Blad tekstury czolgu! czolg.h" << std::endl;
 	}
@@ -14,17 +18,20 @@ void Czolg::inicjalizacja_tekstur()
 }
 void Czolg::inicjalizacja_sprite()
 {
-	this->sprite.setTexture(this->teksturka);
-	//this->sprite.setScale(0.25f, 0.25f);
-	this->sprite.setPosition(300.f, 300.f);
-	this->sprite.setOrigin(37.f, 38.f);
+	this->sprite1.setTexture(this->teksturka1);
+	this->sprite1.setPosition(70.f, 150.f);
+	this->sprite1.setOrigin(37.f, 38.f);
+
+	this->sprite2.setTexture(this->teksturka2);
+	this->sprite2.setPosition(1030.f, 750.f);
+	this->sprite2.setOrigin(37.f, 38.f);
 }
 
 //konstrukor i destruktor
 Czolg::Czolg()
 {
 	this->MoveSpeed = 2.f;
-	this->kat_obrotu = 45.f;
+	this->kat_obrotu = 90.f;
 
 	this->inicjalizacja_tekstur();
 	this->inicjalizacja_sprite();
@@ -34,9 +41,13 @@ Czolg::~Czolg()
 {
 
 }
-const sf::FloatRect Czolg::pozycja() const
+const sf::FloatRect Czolg::pozycja1() const
 {
-	return this->sprite.getGlobalBounds();
+	return this->sprite1.getGlobalBounds();
+}
+const sf::FloatRect Czolg::pozycja2() const
+{
+	return this->sprite2.getGlobalBounds();
 }
 /*
 const sf::FloatRect Czolg::czyDotyka() const
@@ -45,57 +56,63 @@ const sf::FloatRect Czolg::czyDotyka() const
 		return true;
 }
 */
-void Czolg::zmien_pozycje(const sf::Vector2f position)
+void Czolg::zmien_pozycje1(const sf::Vector2f position)
 {
-	this->sprite.setPosition(position);
+	this->sprite1.setPosition(position);
+}
+void Czolg::zmien_pozycje2(const sf::Vector2f position)
+{
+	this->sprite2.setPosition(position);
 }
 
-void Czolg::zmien_pozycje(const float x, const float y)
+void Czolg::zmien_pozycje1(const float x, const float y)
 {
-	this->sprite.setPosition(x, y);
+	this->sprite1.setPosition(x, y);
+}
+void Czolg::zmien_pozycje2(const float x, const float y)
+{
+	this->sprite2.setPosition(x, y);
 }
 
 //metody public 
-void Czolg::movement(const float kierX, const float kierY)
+void Czolg::movement1(const float kierX, const float kierY)
 {
-	this->sprite.move(this->MoveSpeed * kierX, this->MoveSpeed * kierY);
+	this->sprite1.move(this->MoveSpeed * kierX, this->MoveSpeed * kierY);
+}
+void Czolg::movement2(const float kierX, const float kierY)
+{
+	this->sprite2.move(this->MoveSpeed * kierX, this->MoveSpeed * kierY);
 }
 
-void Czolg::rotacja(const float kierunek)
+void Czolg::rotacja1(const float kierunek)
 {
-	this->sprite.rotate(this->kat_obrotu*kierunek);
+	this->sprite1.rotate(this->kat_obrotu*kierunek);
+	//std::cout << this->sprite.getRotation() << std::endl;
+}
+void Czolg::rotacja2(const float kierunek)
+{
+	this->sprite2.rotate(this->kat_obrotu * kierunek);
 	//std::cout << this->sprite.getRotation() << std::endl;
 }
 
-int Czolg::jaki_kat()
+int Czolg::jaki_kat1()
 {
-	return this->sprite.getRotation();
+	return this->sprite1.getRotation();
 }
-/*
-void Czolg::kolizja()
-{ 
-	sf::FloatRect pozycja = this->sprite.getGlobalBounds();
-	//lewa strona
-	if (pozycja.left <= 0.f)
-		this->sprite.setPosition(0.f, pozycja.top);
-	//prawa strona
-	if (pozycja.left + pozycja.width >= 1440.f)
-		this->sprite.setPosition(1440.f - pozycja.width, pozycja.top);
+int Czolg::jaki_kat2()
+{
+	return this->sprite2.getRotation();
+}
 
-	//gora
-	if (pozycja.top <= 0.f)
-		this->sprite.setPosition(pozycja.left, 0.f);
-	//dol
-	if (pozycja.left + pozycja.width >= 900.f)
-		this->sprite.setPosition(pozycja.left, 900.f - pozycja.height);
-}
-*/
 void Czolg::update()
 {
-	//this->kolizja();
 }
 
-void Czolg::rysuj(sf::RenderTarget& target)
+void Czolg::rysuj1(sf::RenderTarget& target)
 {
-	target.draw(this->sprite);
+	target.draw(this->sprite1);
+}
+void Czolg::rysuj2(sf::RenderTarget& target)
+{
+	target.draw(this->sprite2);
 }

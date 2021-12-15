@@ -6,10 +6,13 @@
 class przeszkody
 {
 private:
-	sf::Sprite spritePrzeszkoda;
+	sf::Sprite spriteP[125];
+	//sf::Sprite spritePrzeszkoda;
 	sf::Texture teksturkaPrzeszkoda;
 
-	int x, y;
+	//sf::VertexArray przeszkody(sf::Quads,5)
+
+	int x, y, n;
 
 	void inicjalizacja_tekstur();
 	void inicjalizacja_sprite();

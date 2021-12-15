@@ -1,5 +1,6 @@
 #pragma once
 #include "Czolg.h"
+#include "przeszkody.h"
 
 class game
 {
@@ -16,10 +17,13 @@ private:
 	Czolg* gracz1;
 	Czolg* gracz2;
 
+	przeszkody* przeszkoda1;
+
 
 	void inicjalizacja_mapy();
 	void inicjalizacja_zmiennych();
 	void inicjalizacja_gracza1();
+	void inicjalizacja_przeszkod();
 	void rysuj_mapke();
 
 

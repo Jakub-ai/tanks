@@ -7,8 +7,9 @@ void Czolg::inicjalizacja_tekstur()
 {
 	if (!this->teksturka.loadFromFile("Texture/czolg1.png"))
 	{
-		std::cout << "Blad tekstury czolgu! czolg1.h" << std::endl;
+		std::cout << "Blad tekstury czolgu! czolg.h" << std::endl;
 	}
+	
 	
 }
 void Czolg::inicjalizacja_sprite()
@@ -37,7 +38,13 @@ const sf::FloatRect Czolg::pozycja() const
 {
 	return this->sprite.getGlobalBounds();
 }
-
+/*
+const sf::FloatRect Czolg::czyDotyka() const
+{
+	if (this->sprite.getGlobalBounds().intersects(this->spritePrzeszkoda) == true)
+		return true;
+}
+*/
 void Czolg::zmien_pozycje(const sf::Vector2f position)
 {
 	this->sprite.setPosition(position);

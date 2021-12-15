@@ -2,6 +2,7 @@
 #include "mainMenu.h"
 
 
+
 void game::inicjalizacja_mapy()
 {
 	if (!this->map_txt.loadFromFile("Texture/mapka.png"))
@@ -20,6 +21,10 @@ void game::inicjalizacja_gracza1()
 {
 	this->gracz1 = new Czolg();
 	this->gracz2 = new Czolg();
+}
+void game::inicjalizacja_przeszkod()
+{
+	this->przeszkoda1 = new przeszkody();
 }
 /*
 void game::rysuj_mapke()
@@ -278,6 +283,13 @@ void game::kolizje()
 		std::cout << "Y pos: " << this->gracz2->pozycja().left << std::endl;
 
 	}
+	//przeszkody
+	/*
+	if (this->gracz1->pozycja().intersects == true)
+	{
+		this->gracz1->zmien_pozycje(this->gracz1->pozycja().top, this->gracz1->pozycja().left);
+	}
+	*/
 
 }
 
@@ -292,6 +304,11 @@ void game::rysuj()
 	this->rysowanie_mapki();
 	this->gracz1->rysuj(*this->window);
 	this->gracz2->rysuj(*this->window);
+	//for (int i = 0; i < 10; i++)
+	
+		this->przeszkoda1->rysuj(*this->window);
+	
+	
 	//std::cout << "Y pos: " << this->gracz1->pozycja().top << std::endl;
 
 
@@ -299,15 +316,11 @@ void game::rysuj()
 }
 
 
-
-
-
-
-
 game::game()
 {
 	this->inicjalizacja_mapy();
 	this->inicjalizacja_zmiennych();
+	this->inicjalizacja_przeszkod();
 	this->inicjalizacja_gracza1();
 	//this->inicjalizacja_okna();
 }
@@ -317,6 +330,7 @@ game::~game()
 	delete this->window;
 	delete this->gracz1;
 	delete this->gracz2;
+	delete this->przeszkoda1;
 }
 
 const bool game::running() const

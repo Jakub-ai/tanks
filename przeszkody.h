@@ -6,11 +6,7 @@
 class przeszkody
 {
 private:
-	sf::Sprite spriteP[125];
-	//sf::Sprite spritePrzeszkoda;
-	sf::Texture teksturkaPrzeszkoda;
-
-	//sf::VertexArray przeszkody(sf::Quads,5)
+	
 
 	int x, y, n;
 
@@ -21,6 +17,10 @@ public:
 	przeszkody();
 	virtual ~przeszkody();
 
+	sf::Sprite spriteP[125];
+	sf::Texture teksturkaPrzeszkoda;
+
+	void pos();
 	void update();
 	void rysuj(sf::RenderTarget& target);
 

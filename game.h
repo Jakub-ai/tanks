@@ -8,7 +8,7 @@ private:
 	sf::RenderWindow* window;
 	sf::Event gevent;
 	
-
+	
 	//mapa
 	sf::Sprite map_bg;
 	sf::Texture map_txt;
@@ -40,6 +40,7 @@ public:
 	void update(); 
 	void updateMapy();
 	void kolizje();
+	void kolizjeP();
 	void rysowanie_mapki();
 	void rysuj();
 	

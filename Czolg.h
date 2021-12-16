@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <iostream>
+#include "przeszkody.h"
 
 class Czolg
 {
@@ -10,7 +11,8 @@ private:
 	sf::Texture teksturka1;
 	sf::Sprite sprite2;
 	sf::Texture teksturka2;
-	
+
+	przeszkody* przeszkoda;
 
 	float MoveSpeed;
 	float kat_obrotu;
@@ -23,7 +25,7 @@ public:
 	//konstruktor i destruktor
 	Czolg();
 	virtual ~Czolg();
-
+	
 	const sf::FloatRect pozycja1() const;
 	const sf::FloatRect pozycja2() const;
 	const sf::FloatRect czyDotyka() const;
@@ -40,7 +42,6 @@ public:
 	void rotacja2(const float kat_obrotu);
 	int jaki_kat1();
 	int jaki_kat2();
-	void kolizja();
 	void update();
 	void rysuj1(sf::RenderTarget& target);
 	void rysuj2(sf::RenderTarget& target);

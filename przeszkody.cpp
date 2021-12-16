@@ -12,16 +12,7 @@ void przeszkody::inicjalizacja_tekstur()
 }
 
 void przeszkody::inicjalizacja_sprite()
-{/*
-	this->x = rand() % 16 + 1;
-	this->x *= 50;
-	this->y = rand() % 13 + 1;
-	this->y *= 50;
-	this->sprite[0].setTexture(this->teksturkaPrzeszkoda);
-	this->sprite[0].setPosition(this->x, this->y);
-	this->sprite1.setTexture(this->teksturkaPrzeszkoda);
-	this->sprite1.setPosition(this->x, this->y);
-*/
+{
 	srand(time(NULL));
 
 	for (int i = 0; i < 125; i++)
@@ -32,11 +23,11 @@ void przeszkody::inicjalizacja_sprite()
 		this->y *= 50;
 		this->spriteP[i].setTexture(this->teksturkaPrzeszkoda);
 		this->spriteP[i].setPosition(this->x, this->y);
+		std::cout << "X: " << this->spriteP[i].getPosition().x << " Y: " << this->spriteP[i].getPosition().y << std::endl;
+		std::cout << "OX: " << this->spriteP[i].getOrigin().x << " OY: " << this->spriteP[i].getOrigin().y << std::endl;
+
+		
 	}
-
-
-	//std::cout << "zespawnowana przeszkoda x: " << this->x << "y: " << this->y << std::endl;
-	
 }
 
 przeszkody::przeszkody()
@@ -47,6 +38,11 @@ przeszkody::przeszkody()
 
 przeszkody::~przeszkody()
 {
+}
+
+void przeszkody::pos()
+{
+	
 }
 
 void przeszkody::update()

@@ -1,5 +1,6 @@
 #include "game.h"
 #include "mainMenu.h"
+#include "przeszkody.h"
 
 
 
@@ -143,7 +144,7 @@ void game::updateEvents()
 void game::update()
 {
 	this->updateEvents();
-
+	this->kolizjeP();
 	this->kolizje();
 }
 
@@ -154,67 +155,113 @@ void game::updateMapy()
 void game::kolizje()
 {
 	//lewa strona
-	if (this->gracz1->pozycja1().left < 31.f)
+	if (this->gracz1->pozycja1().left < 50.f)
 	{
-		this->gracz1->zmien_pozycje1(70.f, this->gracz1->pozycja1().top+38);
-		std::cout <<"X pos: " << this->gracz1->pozycja1().left<<std::endl;
+		this->gracz1->zmien_pozycje1(63.f, this->gracz1->pozycja1().top+13);
+		std::cout << "granica " << std::endl;
 
 	}
-	if (this->gracz2->pozycja1().left < 31.f)
+	if (this->gracz2->pozycja1().left < 50.f)
 	{
-		this->gracz2->zmien_pozycje2(70.f, this->gracz2->pozycja2().top+38);
-		std::cout << "X pos: " << this->gracz2->pozycja2().left << std::endl;
+		this->gracz2->zmien_pozycje2(63.f, this->gracz2->pozycja2().top+13);
+		std::cout << "granica " << std::endl;
 
 	}
 	//prawa strona
-	if (this->gracz1->pozycja1().left-38 > 953.f)
+	if (this->gracz1->pozycja1().left > 1020.f)
 	{
-		this->gracz1->zmien_pozycje1(1027.f, this->gracz1->pozycja1().top + 37);
-		std::cout << "Y pos: " << this->gracz1->pozycja1().top << std::endl;
+		this->gracz1->zmien_pozycje1(1033.f, this->gracz1->pozycja1().top+13);
+		std::cout << "granica " << std::endl;
 
 	}
-	if (this->gracz2->pozycja2().left-38 > 953.f)
+	if (this->gracz2->pozycja2().left > 1020.f)
 	{
-		this->gracz2->zmien_pozycje2(1027.f, this->gracz2->pozycja2().top + 37);
-		std::cout << "Y pos: " << this->gracz2->pozycja2().top << std::endl;
+		this->gracz2->zmien_pozycje2(1033.f, this->gracz2->pozycja2().top + 13);
+		std::cout << "granica "<< std::endl;
 
 	}
 	
 	//gora
-	if (this->gracz1->pozycja1().top < 32.f)
+	if (this->gracz1->pozycja1().top < 50.f)
 	{
-		this->gracz1->zmien_pozycje1(this->gracz1->pozycja1().left + 37, 71.f);
-		std::cout << "Y pos: " << this->gracz1->pozycja1().left << std::endl;
+		this->gracz1->zmien_pozycje1(this->gracz1->pozycja1().left + 13, 63.f);
+		std::cout << "granica " << std::endl;
 
 	}
-	if (this->gracz2->pozycja2().top  < 32.f)
+	if (this->gracz2->pozycja2().top  < 50.f)
 	{
-		this->gracz2->zmien_pozycje2(this->gracz2->pozycja2().left+37, 71.f);
-		std::cout << "Y pos: " << this->gracz2->pozycja2().left << std::endl;
+		this->gracz2->zmien_pozycje2(this->gracz2->pozycja2().left+13, 63.f);
+		std::cout << "granica " << std::endl;
 
 	}
 
 	//dol
-	if (this->gracz1->pozycja1().top + 38 > 830.f)
+	if (this->gracz1->pozycja1().top > 820.f)
 	{
-		this->gracz1->zmien_pozycje1(this->gracz1->pozycja1().left + 38, 830.f);
-		std::cout << "Y pos: " << this->gracz1->pozycja1().left << std::endl;
+		this->gracz1->zmien_pozycje1(this->gracz1->pozycja1().left + 13, 833.f);
+		std::cout << "granica " << std::endl;
 
 	}
-	if (this->gracz2->pozycja2().top + 38 > 830.f)
+	if (this->gracz2->pozycja2().top > 820.f)
 	{
-		this->gracz2->zmien_pozycje2(this->gracz2->pozycja2().left + 38, 830.f);
-		std::cout << "Y pos: " << this->gracz2->pozycja2().left << std::endl;
+		this->gracz2->zmien_pozycje2(this->gracz2->pozycja2().left + 13, 833.f);
+		std::cout << "granica " << std::endl;
 
 	}
-	//przeszkody
-	/*
-	if (this->gracz1->pozycja().intersects == true)
-	{
-		this->gracz1->zmien_pozycje(this->gracz1->pozycja().top, this->gracz1->pozycja().left);
-	}
-	*/
 
+
+}
+//kolizja z przeszkodami
+void game::kolizjeP()
+{
+	for (int i = 0; i < 125; i++)
+	{
+		//od lewej
+		if (this->gracz1->pozycja1().intersects(this->przeszkoda1->spriteP[i].getGlobalBounds()) && this->gracz1->jaki_kat1() == 90)
+		{
+			this->gracz1->zmien_pozycje1(this->gracz1->pozycja1().left + 11, this->gracz1->pozycja1().top + 13);
+			std::cout << "kolizja" << std::endl;
+		}
+		if (this->gracz2->pozycja2().intersects(this->przeszkoda1->spriteP[i].getGlobalBounds()) && this->gracz2->jaki_kat2() == 90)
+		{
+			this->gracz2->zmien_pozycje2(this->gracz2->pozycja2().left + 11, this->gracz2->pozycja2().top + 13);
+			std::cout << "kolizja" << std::endl;
+		}
+		//od gory
+		if (this->gracz1->pozycja1().intersects(this->przeszkoda1->spriteP[i].getGlobalBounds()) && this->gracz1->jaki_kat1() == 180)
+		{
+			this->gracz1->zmien_pozycje1(this->gracz1->pozycja1().left + 13, this->gracz1->pozycja1().top + 11);
+			std::cout << "kolizja" << std::endl;
+		}
+		if (this->gracz2->pozycja2().intersects(this->przeszkoda1->spriteP[i].getGlobalBounds()) && this->gracz2->jaki_kat2() == 180)
+		{
+			this->gracz2->zmien_pozycje2(this->gracz2->pozycja2().left + 13, this->gracz2->pozycja2().top + 11);
+			std::cout << "kolizja" << std::endl;
+		}
+		//od prawej
+		if (this->gracz1->pozycja1().intersects(this->przeszkoda1->spriteP[i].getGlobalBounds()) && this->gracz1->jaki_kat1() == 270)
+		{
+			this->gracz1->zmien_pozycje1(this->gracz1->pozycja1().left + 15, this->gracz1->pozycja1().top + 13);
+			std::cout << "kolizja" << std::endl;
+		}
+		if (this->gracz2->pozycja2().intersects(this->przeszkoda1->spriteP[i].getGlobalBounds()) && this->gracz2->jaki_kat2() == 270)
+		{
+			this->gracz2->zmien_pozycje2(this->gracz2->pozycja2().left + 15, this->gracz2->pozycja2().top + 13);
+			std::cout << "kolizja" << std::endl;
+		}
+		//od dolu
+		if (this->gracz1->pozycja1().intersects(this->przeszkoda1->spriteP[i].getGlobalBounds()) && this->gracz1->jaki_kat1() == 0)
+		{
+			this->gracz1->zmien_pozycje1(this->gracz1->pozycja1().left + 13, this->gracz1->pozycja1().top + 15);
+			std::cout << "kolizja" << std::endl;
+		}
+		if (this->gracz2->pozycja2().intersects(this->przeszkoda1->spriteP[i].getGlobalBounds()) && this->gracz2->jaki_kat2() == 0)
+		{
+			this->gracz2->zmien_pozycje2(this->gracz2->pozycja2().left + 13, this->gracz2->pozycja2().top + 15);
+			std::cout << "kolizja" << std::endl;
+		}
+	}
+	
 }
 
 void game::rysowanie_mapki()
@@ -228,11 +275,7 @@ void game::rysuj()
 	this->rysowanie_mapki();
 	this->gracz1->rysuj1(*this->window);
 	this->gracz2->rysuj2(*this->window);
-	//for (int i = 0; i < 10; i++)
-	
-		this->przeszkoda1->rysuj(*this->window);
-	
-	
+	this->przeszkoda1->rysuj(*this->window);
 	//std::cout << "Y pos: " << this->gracz1->pozycja().top << std::endl;
 
 

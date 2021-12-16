@@ -20,11 +20,15 @@ void Czolg::inicjalizacja_sprite()
 {
 	this->sprite1.setTexture(this->teksturka1);
 	this->sprite1.setPosition(70.f, 150.f);
-	this->sprite1.setOrigin(37.f, 38.f);
+	this->sprite1.setOrigin(13.f, 13.f);
+	this->sprite1.setRotation(180.f);
 
 	this->sprite2.setTexture(this->teksturka2);
-	this->sprite2.setPosition(1030.f, 750.f);
-	this->sprite2.setOrigin(37.f, 38.f);
+	this->sprite2.setPosition(1020.f, 700.f);
+	this->sprite2.setOrigin(13.f, 13.f);
+
+	
+
 }
 
 //konstrukor i destruktor
@@ -52,8 +56,7 @@ const sf::FloatRect Czolg::pozycja2() const
 /*
 const sf::FloatRect Czolg::czyDotyka() const
 {
-	if (this->sprite.getGlobalBounds().intersects(this->spritePrzeszkoda) == true)
-		return true;
+	this->przeszkoda
 }
 */
 void Czolg::zmien_pozycje1(const sf::Vector2f position)
@@ -103,6 +106,7 @@ int Czolg::jaki_kat2()
 {
 	return this->sprite2.getRotation();
 }
+
 
 void Czolg::update()
 {

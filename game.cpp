@@ -149,44 +149,51 @@ void game::updateEvents()
 	{
 		if (this->gracz1->jaki_kat1() == 90 && this->gracz1->canAttack())
 		{
-			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz1->pos1().x + 10, this->gracz1->pos1().y - 5, 1.f, 0.f, 5.f));
+			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz1->pos1().x + 15, this->gracz1->pos1().y - 5, 1.f, 0.f, 5.f));
 		}
 		if (this->gracz1->jaki_kat1() == 180 && this->gracz1->canAttack())
 		{
-			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz1->pos1().x - 5, this->gracz1->pos1().y + 10, 0.f, 1.f, 5.f));
+			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz1->pos1().x - 5, this->gracz1->pos1().y + 15, 0.f, 1.f, 5.f));
 		}
 		if (this->gracz1->jaki_kat1() == 270 && this->gracz1->canAttack())
 		{
-			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz1->pos1().x-10, this->gracz1->pos1().y - 5, -1.f, 0.f, 5.f));
+			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz1->pos1().x-25, this->gracz1->pos1().y - 5, -1.f, 0.f, 5.f));
 		}
 		if (this->gracz1->jaki_kat1() == 0 && this->gracz1->canAttack())
 		{
-			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz1->pos1().x - 5, this->gracz1->pos1().y-10, 0.f, -1.f, 5.f));
+			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz1->pos1().x - 5, this->gracz1->pos1().y-25, 0.f, -1.f, 5.f));
 		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::K))
 	{
 		if (this->gracz2->jaki_kat2() == 90 && this->gracz2->canAttack())
 		{
-			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz2->pos2().x + 10, this->gracz2->pos2().y - 5, 1.f, 0.f, 5.f));
+			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz2->pos2().x + 15, this->gracz2->pos2().y - 5, 1.f, 0.f, 5.f));
 		}
 		if (this->gracz2->jaki_kat2() == 180 && this->gracz2->canAttack())
 		{
-			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz2->pos2().x - 5, this->gracz2->pos2().y + 10, 0.f, 1.f, 5.f));
+			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz2->pos2().x - 5, this->gracz2->pos2().y + 15, 0.f, 1.f, 5.f));
 		}
 		if (this->gracz2->jaki_kat2() == 270 && this->gracz2->canAttack())
 		{
-			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz2->pos2().x-20, this->gracz2->pos2().y - 5, -1.f, 0.f, 5.f));
+			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz2->pos2().x-25, this->gracz2->pos2().y - 5, -1.f, 0.f, 5.f));
 		}
 		if (this->gracz2->jaki_kat2() == 0 && this->gracz2->canAttack())
 		{
-			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz2->pos2().x-5, this->gracz2->pos2().y-20, 0.f, -1.f, 5.f));
+			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz2->pos2().x-5, this->gracz2->pos2().y-25, 0.f, -1.f, 5.f));
 		}
 	}
 }
 
 void game::updateBullets()
 {
+	for (auto* bullet : this->bullets)
+	{
+		if (bullet->pos().intersects(this->gracz2->pozycja2()))
+			this->window->close();
+		if (bullet->pos().intersects(this->gracz1->pozycja1()))
+			this->window->close();
+	}
 	
 	unsigned licznik = 0;
 	for (auto* bullet : this->bullets)
@@ -208,11 +215,8 @@ void game::updateBullets()
 		std::cout << this->bullets.size() << std::endl;
 	}
 	
-	for (auto* bullet : this->bullets)
-	{
-		if (bullet->pos().intersects(this->gracz2->pozycja2()))
-			this->window->close();
-	}
+	
+
 	
 	
 	

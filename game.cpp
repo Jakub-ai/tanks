@@ -176,11 +176,11 @@ void game::updateEvents()
 		}
 		if (this->gracz2->jaki_kat2() == 270 && this->gracz2->canAttack())
 		{
-			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz2->pos2().x - 10, this->gracz2->pos2().y - 5, -1.f, 0.f, 5.f));
+			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz2->pos2().x-20, this->gracz2->pos2().y - 5, -1.f, 0.f, 5.f));
 		}
 		if (this->gracz2->jaki_kat2() == 0 && this->gracz2->canAttack())
 		{
-			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz2->pos2().x - 5, this->gracz2->pos2().y - 10, 0.f, -1.f, 5.f));
+			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz2->pos2().x-5, this->gracz2->pos2().y-20, 0.f, -1.f, 5.f));
 		}
 	}
 }
@@ -194,6 +194,7 @@ void game::updateBullets()
 		bullet->update();
 		for (int i = 0; i < 125; i++)
 		{
+			//std::cout << "X: " << this->gracz2->pos2().x << " Y: " << this->gracz2->pos2().y << std::endl;
 			if (bullet->pos().top + bullet->pos().height <= 50.f || bullet->pos().top - bullet->pos().height >= 850.f || bullet->pos().left + bullet->pos().width <= 50.f || bullet->pos().left - bullet->pos().width >= 1050.f || bullet->pos().intersects(this->przeszkoda1->spriteP[i].getGlobalBounds()) || bullet->pos().intersects(this->gracz1->pozycja1()) || bullet->pos().intersects(this->gracz2->pozycja2()))
 			{
 				delete this->bullets.at(licznik);
@@ -206,13 +207,13 @@ void game::updateBullets()
 
 		std::cout << this->bullets.size() << std::endl;
 	}
-	/*
+	
 	for (auto* bullet : this->bullets)
 	{
 		if (bullet->pos().intersects(this->gracz2->pozycja2()))
-			this->~game();
+			this->window->close();
 	}
-	*/
+	
 	
 	
 	

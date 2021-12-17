@@ -28,6 +28,12 @@ void game::inicjalizacja_przeszkod()
 	this->przeszkoda1 = new przeszkody();
 }
 
+void game::inicjalizacja_tekstur()
+{
+	this->tekstury["BULLET"] = new sf::Texture();
+	this->tekstury["BULLET"]->loadFromFile("Texture/bullet.png");
+}
+
 void game::inicjalizacja_okna()
 {
 	this->window = new sf::RenderWindow(sf::VideoMode(1440, 900), "Gra Tanki", sf::Style::Titlebar | sf::Style::Close);
@@ -139,13 +145,42 @@ void game::updateEvents()
 	{
 		this->gracz2->movement2(1.f, 0.f);
 	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	{
+		if (this->gracz1->jaki_kat1() == 90)
+		{
+			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz1->pos1().x, this->gracz1->pos1().y, 1.f, 0.f, 3.f));
+		}
+		if (this->gracz1->jaki_kat1() == 180)
+		{
+			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz1->pos1().x, this->gracz1->pos1().y, 0.f, 1.f, 3.f));
+		}
+		if (this->gracz1->jaki_kat1() == 270)
+		{
+			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz1->pos1().x, this->gracz1->pos1().y, -1.f, 0.f, 3.f));
+		}
+		if (this->gracz1->jaki_kat1() == 0)
+		{
+			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz1->pos1().x, this->gracz1->pos1().y, 0.f, -1.f, 3.f));
+		}
+	}
 }
+
+void game::updateBullets()
+{
+	for (auto* bullet : this->bullets)
+	{
+		bullet->update();
+	}
+}
+
 
 void game::update()
 {
 	this->updateEvents();
 	this->kolizjeP();
 	this->kolizje();
+	this->updateBullets();
 }
 
 void game::updateMapy()
@@ -276,6 +311,11 @@ void game::rysuj()
 	this->gracz1->rysuj1(*this->window);
 	this->gracz2->rysuj2(*this->window);
 	this->przeszkoda1->rysuj(*this->window);
+
+	for (auto *bullet : this->bullets)
+	{
+		bullet->rysuj(*this->window); 
+	}
 	//std::cout << "Y pos: " << this->gracz1->pozycja().top << std::endl;
 
 
@@ -289,6 +329,7 @@ game::game()
 	this->inicjalizacja_zmiennych();
 	this->inicjalizacja_przeszkod();
 	this->inicjalizacja_gracza1();
+	this->inicjalizacja_tekstur();
 	//this->inicjalizacja_okna();
 }
 
@@ -298,6 +339,16 @@ game::~game()
 	delete this->gracz1;
 	delete this->gracz2;
 	delete this->przeszkoda1;
+
+	for (auto& i : this->tekstury)
+	{
+		delete i.second;
+	}
+
+	for (auto *i : this->bullets)
+	{
+		delete i;
+	}
 }
 
 const bool game::running() const

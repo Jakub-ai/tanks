@@ -53,6 +53,12 @@ const sf::FloatRect Czolg::pozycja2() const
 {
 	return this->sprite2.getGlobalBounds();
 }
+
+const sf::Vector2f& Czolg::pos1() const
+{
+	return this->sprite1.getPosition();
+}
+
 /*
 const sf::FloatRect Czolg::czyDotyka() const
 {

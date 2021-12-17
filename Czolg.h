@@ -28,7 +28,8 @@ public:
 	
 	const sf::FloatRect pozycja1() const;
 	const sf::FloatRect pozycja2() const;
-	const sf::FloatRect czyDotyka() const;
+
+	const sf::Vector2f& pos1() const;
 
 	void zmien_pozycje1(const sf::Vector2f position);
 	void zmien_pozycje1(const float x, const float y);

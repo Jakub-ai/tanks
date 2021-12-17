@@ -147,31 +147,95 @@ void game::updateEvents()
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
-		if (this->gracz1->jaki_kat1() == 90)
+		if (this->gracz1->jaki_kat1() == 90 && this->gracz1->canAttack())
 		{
-			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz1->pos1().x, this->gracz1->pos1().y, 1.f, 0.f, 3.f));
+			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz1->pos1().x + 10, this->gracz1->pos1().y - 5, 1.f, 0.f, 5.f));
 		}
-		if (this->gracz1->jaki_kat1() == 180)
+		if (this->gracz1->jaki_kat1() == 180 && this->gracz1->canAttack())
 		{
-			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz1->pos1().x, this->gracz1->pos1().y, 0.f, 1.f, 3.f));
+			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz1->pos1().x - 5, this->gracz1->pos1().y + 10, 0.f, 1.f, 5.f));
 		}
-		if (this->gracz1->jaki_kat1() == 270)
+		if (this->gracz1->jaki_kat1() == 270 && this->gracz1->canAttack())
 		{
-			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz1->pos1().x, this->gracz1->pos1().y, -1.f, 0.f, 3.f));
+			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz1->pos1().x-10, this->gracz1->pos1().y - 5, -1.f, 0.f, 5.f));
 		}
-		if (this->gracz1->jaki_kat1() == 0)
+		if (this->gracz1->jaki_kat1() == 0 && this->gracz1->canAttack())
 		{
-			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz1->pos1().x, this->gracz1->pos1().y, 0.f, -1.f, 3.f));
+			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz1->pos1().x - 5, this->gracz1->pos1().y-10, 0.f, -1.f, 5.f));
+		}
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::K))
+	{
+		if (this->gracz2->jaki_kat2() == 90 && this->gracz2->canAttack())
+		{
+			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz2->pos2().x + 10, this->gracz2->pos2().y - 5, 1.f, 0.f, 5.f));
+		}
+		if (this->gracz2->jaki_kat2() == 180 && this->gracz2->canAttack())
+		{
+			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz2->pos2().x - 5, this->gracz2->pos2().y + 10, 0.f, 1.f, 5.f));
+		}
+		if (this->gracz2->jaki_kat2() == 270 && this->gracz2->canAttack())
+		{
+			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz2->pos2().x - 10, this->gracz2->pos2().y - 5, -1.f, 0.f, 5.f));
+		}
+		if (this->gracz2->jaki_kat2() == 0 && this->gracz2->canAttack())
+		{
+			this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->gracz2->pos2().x - 5, this->gracz2->pos2().y - 10, 0.f, -1.f, 5.f));
 		}
 	}
 }
 
 void game::updateBullets()
 {
+	
+	unsigned licznik = 0;
 	for (auto* bullet : this->bullets)
 	{
 		bullet->update();
+		for (int i = 0; i < 125; i++)
+		{
+			if (bullet->pos().top + bullet->pos().height <= 50.f || bullet->pos().top - bullet->pos().height >= 850.f || bullet->pos().left + bullet->pos().width <= 50.f || bullet->pos().left - bullet->pos().width >= 1050.f || bullet->pos().intersects(this->przeszkoda1->spriteP[i].getGlobalBounds()) || bullet->pos().intersects(this->gracz1->pozycja1()) || bullet->pos().intersects(this->gracz2->pozycja2()))
+			{
+				delete this->bullets.at(licznik);
+				this->bullets.erase(this->bullets.begin() + licznik);
+				--licznik;
+				break;
+			}
+		}
+		++licznik;
+
+		std::cout << this->bullets.size() << std::endl;
 	}
+	/*
+	for (auto* bullet : this->bullets)
+	{
+		if (bullet->pos().intersects(this->gracz2->pozycja2()))
+			this->~game();
+	}
+	*/
+	
+	
+	
+	
+	
+	
+	
+	/*
+	unsigned licznik = 0;
+	for (auto* bullet : this->bullets)
+	{
+		bullet->update();
+		
+			if (bullet->pos().top + bullet->pos().height <= 50.f || bullet->pos().top - bullet->pos().height >= 850.f || bullet->pos().left + bullet->pos().width <= 50.f || bullet->pos().left - bullet->pos().width >= 1050.f || bullet->pos().intersects(this->gracz2->pozycja2()) || bullet->pos().intersects(this->gracz1->pozycja1()))
+			{
+				delete this->bullets.at(licznik);
+				this->bullets.erase(this->bullets.begin() + licznik);
+				--licznik;
+			}
+			++licznik;
+		
+		std::cout << this->bullets.size() << std::endl;
+	}*/
 }
 
 
@@ -179,8 +243,11 @@ void game::update()
 {
 	this->updateEvents();
 	this->kolizjeP();
+	//this->kolizjeB();
 	this->kolizje();
 	this->updateBullets();
+	this->gracz1->update();
+	this->gracz2->update();
 }
 
 void game::updateMapy()
@@ -298,7 +365,19 @@ void game::kolizjeP()
 	}
 	
 }
-
+/*
+void game::kolizjeB()
+{
+	for (int i = 0; i < 125; i++)
+	{
+		if (this->pocisk->pos().intersects(this->przeszkoda1->spriteP[i].getGlobalBounds()))
+		{
+			this->bullets.pop_back();
+		}
+	}
+	
+}
+*/
 void game::rysowanie_mapki()
 {
 	this->window->draw(this->map_bg);

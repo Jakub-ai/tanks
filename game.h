@@ -23,6 +23,7 @@ private:
 
 	std::map<std::string, sf::Texture*> tekstury;
 	std::vector<bullet*> bullets;
+	bullet* pocisk;
 
 
 	void inicjalizacja_mapy();
@@ -48,6 +49,7 @@ public:
 	void updateMapy();
 	void kolizje();
 	void kolizjeP();
+	void kolizjeB();
 	void rysowanie_mapki();
 	void rysuj();
 	

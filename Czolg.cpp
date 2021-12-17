@@ -34,9 +34,8 @@ void Czolg::inicjalizacja_sprite()
 //konstrukor i destruktor
 Czolg::Czolg()
 {
-	this->MoveSpeed = 2.f;
-	this->kat_obrotu = 90.f;
 
+	this->inicjalizacja_gracza();
 	this->inicjalizacja_tekstur();
 	this->inicjalizacja_sprite();
 }
@@ -57,6 +56,19 @@ const sf::FloatRect Czolg::pozycja2() const
 const sf::Vector2f& Czolg::pos1() const
 {
 	return this->sprite1.getPosition();
+}
+
+const sf::Vector2f& Czolg::pos2() const
+{
+	return this->sprite2.getPosition();
+}
+
+void Czolg::inicjalizacja_gracza()
+{
+	this->MoveSpeed = 2.f;
+	this->kat_obrotu = 90.f;
+	this->AttackCD_Max = 50.f;
+	this->AttackCD = this->AttackCD_Max;
 }
 
 /*
@@ -113,9 +125,28 @@ int Czolg::jaki_kat2()
 	return this->sprite2.getRotation();
 }
 
+const bool Czolg::canAttack()
+{
+	if (this->AttackCD >= this->AttackCD_Max)
+	{
+		this->AttackCD = 0.f;
+		return true;
+	}
+		
+	return false;
+}
+
 
 void Czolg::update()
 {
+	this->updateAttack();
+}
+
+void Czolg::updateAttack()
+{
+	if(this->AttackCD<this->AttackCD_Max)
+		this->AttackCD += 0.25f;
+
 }
 
 void Czolg::rysuj1(sf::RenderTarget& target)

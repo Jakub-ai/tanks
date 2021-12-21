@@ -19,6 +19,8 @@ public:
 	void Sound();
 	void Buffer();
 	void EndMusic();
+	void VolDown();
+	void VolUp();
 	sf::SoundBuffer buffer;
 	sf::Sound sound;
 

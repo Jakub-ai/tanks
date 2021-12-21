@@ -10,6 +10,8 @@
 		#include <SFML/Window/Window.hpp>
 		#include <SFML/Graphics/RenderWindow.hpp>
 		#include <SFML/Graphics.hpp>
+		#include "mainMenu.h"
+
 
 	using namespace std;
 	using namespace sf;
@@ -20,6 +22,9 @@
 			sf::RenderWindow* window;
 			sf::Event op;
 			sf::Font font;
+
+			MainMenu* menu;
+
 			Text opcje[Max_Opcje];
 			void inicjalizacja_zmiennych();
 		public:

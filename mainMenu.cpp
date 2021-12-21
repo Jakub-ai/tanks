@@ -99,3 +99,27 @@ void MainMenu::EndMusic()
 	sound.resetBuffer(); 
 }
 
+void MainMenu::VolDown()
+{
+	if (sound.getVolume() >= 10)
+	{
+		sound.setVolume(sound.getVolume() - 10);
+	}
+	else
+	{
+		sound.setVolume(1);
+	}
+}
+
+void MainMenu::VolUp()
+{
+	if (sound.getVolume() <= 100)
+	{
+		sound.setVolume(sound.getVolume() + 10);
+	}
+	else
+	{
+		sound.setVolume(100);
+	}
+		
+}

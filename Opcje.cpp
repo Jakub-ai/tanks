@@ -45,6 +45,10 @@ void Opcje::updateEvents()
 		case sf::Event::KeyPressed:
 			if (this->op.key.code == sf::Keyboard::Escape)
 				this->window->close();
+			/*if (this->op.key.code == sf::Keyboard::F2)
+				this->menu->VolUp();
+			if (this->op.key.code == sf::Keyboard::F3)
+				this->menu->VolDown();*/
 			break;
 		}
 	}

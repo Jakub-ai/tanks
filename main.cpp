@@ -61,6 +61,16 @@ int main()
 			}
 			if (event.type == Event::KeyReleased)
 			{
+				if (event.key.code == sf::Keyboard::W)
+				{
+					mainMenu.VolUp();
+					break;
+				}
+				if (event.key.code == sf::Keyboard::S)
+				{
+					mainMenu.VolDown();
+					break;
+				}
 				if (event.key.code == Keyboard::Up)
 				{
 					mainMenu.MoveUp();

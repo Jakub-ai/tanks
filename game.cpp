@@ -13,6 +13,7 @@ void game::inicjalizacja_mapy()
 	this->map_bg.setTexture(this->map_txt);
 }
 
+
 void game::inicjalizacja_zmiennych()
 {
 	this->window = nullptr;

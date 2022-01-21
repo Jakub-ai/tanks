@@ -22,6 +22,7 @@ void game2::inicjalizacja_zmiennych()
 void game2::inicjalizacja_gracza1()
 {
 	this->gracz1 = new Czolg();
+	this->oponent = new Oponent();
 }
 void game2::inicjalizacja_przeszkod()
 {
@@ -134,6 +135,122 @@ void game2::updateEvents()
 		}
 	}
 	
+
+	// ruch oponenta
+
+	/*if (this->oponent->jaki_kat() == 0)
+	{
+		this->oponent->movement(0, -1.f);
+		this->oponent->movement_rs(0, -1.f);
+	}
+	if (this->oponent->jaki_kat() == 180)
+	{
+		this->oponent->movement(0, 1.f);
+		this->oponent->movement_rs(0, 1.f);
+	}*/
+
+	if (this->oponent->pozycja().top < 60.f)
+	{
+		this->oponent->rotacja(2.f);
+
+	}
+	if (this->oponent->pozycja().top > 810.f)
+	{
+		this->oponent->rotacja(2.f);
+	}
+
+	//strzelanie
+
+	if (this->gracz1->pozycja1().intersects(this->oponent->y_axis.getGlobalBounds()) && this->oponent->canAttack() && this->oponent->jaki_kat() == 0)
+	{
+		this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->oponent->pos().x - 5, this->oponent->pos().y - 25, 0.f, -1.f, 5.f));
+	}
+	if (this->gracz1->pozycja1().intersects(this->oponent->y_axis.getGlobalBounds()) && this->oponent->canAttack() && this->oponent->jaki_kat() == 180)
+	{
+		this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->oponent->pos().x - 5, this->oponent->pos().y + 15, 0.f, 1.f, 5.f));
+	}
+	if (!this->gracz1->pozycja1().intersects(this->oponent->x_axis.getGlobalBounds()))
+	{
+		if (this->oponent->jaki_kat() == 0)
+		{
+			this->oponent->movement(0, -1.f);
+			this->oponent->movement_rs(0, -1.f);
+		}
+		if (this->oponent->jaki_kat() == 180)
+		{
+			this->oponent->movement(0, 1.f);
+			this->oponent->movement_rs(0, 1.f);
+		}
+		if (this->oponent->jaki_kat() == 270)
+		{
+			if (this->oponent->last_angle == 0)
+			{
+				this->oponent->rotacja(1.f);
+			}
+			else
+			{
+				this->oponent->rotacja(-1.f);
+			}
+		}
+
+	}
+	else 	
+	{
+			if (this->oponent->jaki_kat() == 270)
+			{
+				if (this->oponent->canAttack())
+				{
+					this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->oponent->pos().x - 25, this->oponent->pos().y - 5, -1.f, 0.f, 5.f));
+				}
+				
+			}
+			else if (this->oponent->jaki_kat() !=270)
+			{
+				this->oponent->last_angle = this->oponent->jaki_kat();
+
+				if (this->oponent->last_angle == 0)
+				{
+					this->oponent->rotacja(-1.f);
+					if (this->oponent->canAttack())
+					{
+						this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->oponent->pos().x - 25, this->oponent->pos().y - 5, -1.f, 0.f, 5.f));
+					}
+				}
+				else if (this->oponent->last_angle == 180)
+				{
+					this->oponent->rotacja(1.f);
+					if (this->oponent->canAttack())
+					{
+						this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->oponent->pos().x - 25, this->oponent->pos().y - 5, -1.f, 0.f, 5.f));
+					}
+				}
+				
+				
+			}
+			
+	}
+
+
+	/*if (player.x == opponent.x) {
+		if (opponent.angle != <pointing at the player>) {
+			opponent.rotate(<towards player>);
+		}
+		else {
+			<fire a bullet>
+		}
+	}
+	else {
+		if (opponent.angle != <default angle>) {
+			opponent.rotate(<back to default>);
+		}
+		else {
+			opponent.move();
+		}
+	}*/
+
+
+	
+
 }
 
 void game2::updateBullets()
@@ -176,6 +293,7 @@ void game2::update()
 	this->kolizje();
 	this->updateBullets();
 	this->gracz1->update();
+	this->oponent->update();
 }
 
 void game2::updateMapy()
@@ -264,6 +382,7 @@ void game2::rysuj()
 	this->window->clear(sf::Color::Green);
 	this->rysowanie_mapki();
 	this->gracz1->rysuj1(*this->window);
+	this->oponent->rysuj(*this->window);
 	this->przeszkoda1->rysuj(*this->window);
 	this->window->draw(this->zegar);
 	for (auto* bullet : this->bullets)
@@ -295,6 +414,7 @@ game2::~game2()
 {
 	delete this->window;
 	delete this->gracz1;
+	delete this->oponent;
 
 	delete this->przeszkoda1;
 

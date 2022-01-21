@@ -2,6 +2,7 @@
 #include "Czolg.h"
 #include "przeszkody.h"
 #include "bullet.h"
+#include "Oponent.h"
 #include <map>
 
 class game2
@@ -17,6 +18,8 @@ private:
 
 
 	Czolg* gracz1;
+
+	Oponent* oponent;
 
 	przeszkody* przeszkoda1;
 

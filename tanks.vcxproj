@@ -154,17 +154,21 @@
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="Czolg.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="game2.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainMenu.cpp" />
     <ClCompile Include="Opcje.cpp" />
+    <ClCompile Include="Oponent.cpp" />
     <ClCompile Include="przeszkody.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bullet.h" />
     <ClInclude Include="Czolg.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="game2.h" />
     <ClInclude Include="mainMenu.h" />
     <ClInclude Include="Opcje.h" />
+    <ClInclude Include="Oponent.h" />
     <ClInclude Include="przeszkody.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

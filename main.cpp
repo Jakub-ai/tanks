@@ -1,5 +1,6 @@
 #include "mainMenu.h"
 #include "game.h"
+#include "game2.h"
 #include "Opcje.h"
 #include <SFML/Graphics.hpp>
 
@@ -40,6 +41,7 @@ int main()
 
 	//gra
 	game gra;
+	game2 gra2;
 	//opcje
 	Opcje opcje;
 
@@ -105,11 +107,11 @@ int main()
 
 					Menu.close();
 					mainMenu.EndMusic();
-					opcje.inicjalizacja_oknaO();
-					while (opcje.working())
+					gra2.inicjalizacja_okna();
+					while (gra2.running())
 					{
-						opcje.updateO();
-						opcje.rysujO();
+						gra2.update();
+						gra2.rysuj();
 					}
 					/*RenderWindow Opcje(VideoMode(1440, 900), "Opcje");
 					while (Opcje.isOpen())// tu jest napisane co dokladnie sie dzieje przy wyborze opcji opcje

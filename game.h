@@ -25,6 +25,8 @@ private:
 	std::vector<bullet*> bullets;
 	bullet* pocisk;
 
+	
+
 
 	void inicjalizacja_mapy();
 	void inicjalizacja_zmiennych();
@@ -42,7 +44,14 @@ public:
 	//inne
 	const bool running() const;
 
+	sf::Text zegar;
+	sf::Clock clock;
+	sf::Time czas;
+	sf::Font font;
+
+
 	//metody
+	void zegarek();
 	void updateEvents();
 	void update(); 
 	void updateBullets();

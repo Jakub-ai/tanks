@@ -42,6 +42,17 @@ void game::inicjalizacja_okna()
 	this->window->setVerticalSyncEnabled(false);
 }
 
+void game::zegarek()
+{
+	this->czas = this->clock.restart();
+	//this->czas = this->clock.getElapsedTime();
+	this->zegar.setFont(font);
+	this->zegar.setFillColor(sf::Color::Black);
+	this->zegar.setString(to_string(this->czas.asSeconds()));
+	this->zegar.setPosition(1150, 300);
+
+}
+
 void game::updateEvents()
 {
 
@@ -216,37 +227,12 @@ void game::updateBullets()
 		std::cout << this->bullets.size() << std::endl;
 	}
 	
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	/*
-	unsigned licznik = 0;
-	for (auto* bullet : this->bullets)
-	{
-		bullet->update();
-		
-			if (bullet->pos().top + bullet->pos().height <= 50.f || bullet->pos().top - bullet->pos().height >= 850.f || bullet->pos().left + bullet->pos().width <= 50.f || bullet->pos().left - bullet->pos().width >= 1050.f || bullet->pos().intersects(this->gracz2->pozycja2()) || bullet->pos().intersects(this->gracz1->pozycja1()))
-			{
-				delete this->bullets.at(licznik);
-				this->bullets.erase(this->bullets.begin() + licznik);
-				--licznik;
-			}
-			++licznik;
-		
-		std::cout << this->bullets.size() << std::endl;
-	}*/
 }
 
 
 void game::update()
 {
+	this->zegarek();
 	this->updateEvents();
 	this->kolizjeP();
 	//this->kolizjeB();
@@ -371,19 +357,7 @@ void game::kolizjeP()
 	}
 	
 }
-/*
-void game::kolizjeB()
-{
-	for (int i = 0; i < 125; i++)
-	{
-		if (this->pocisk->pos().intersects(this->przeszkoda1->spriteP[i].getGlobalBounds()))
-		{
-			this->bullets.pop_back();
-		}
-	}
-	
-}
-*/
+
 void game::rysowanie_mapki()
 {
 	this->window->draw(this->map_bg);
@@ -396,7 +370,7 @@ void game::rysuj()
 	this->gracz1->rysuj1(*this->window);
 	this->gracz2->rysuj2(*this->window);
 	this->przeszkoda1->rysuj(*this->window);
-
+	this->window->draw(this->zegar);
 	for (auto *bullet : this->bullets)
 	{
 		bullet->rysuj(*this->window); 
@@ -410,6 +384,10 @@ void game::rysuj()
 
 game::game()
 {
+	if (!font.loadFromFile("Fonts/AlexandriaFLF.ttf")) {
+		cout << "No Font HERE !!!";
+	}
+
 	this->inicjalizacja_mapy();
 	this->inicjalizacja_zmiennych();
 	this->inicjalizacja_przeszkod();

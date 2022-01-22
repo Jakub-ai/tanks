@@ -112,6 +112,8 @@ int main()
 					{
 						gra2.update();
 						gra2.rysuj();
+						
+						
 					}
 					/*RenderWindow Opcje(VideoMode(1440, 900), "Opcje");
 					while (Opcje.isOpen())// tu jest napisane co dokladnie sie dzieje przy wyborze opcji opcje

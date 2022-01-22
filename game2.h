@@ -28,7 +28,7 @@ private:
 	bullet* pocisk;
 
 
-
+	
 
 	void inicjalizacja_mapy();
 	void inicjalizacja_zmiennych();
@@ -46,6 +46,8 @@ public:
 	//inne
 	const bool running() const;
 
+	
+	int is_paused;
 	sf::Text zegar;
 	sf::Clock clock;
 	sf::Time czas;

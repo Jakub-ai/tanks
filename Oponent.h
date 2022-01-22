@@ -34,6 +34,7 @@ public:
 
 	void inicjalizacja_oponenta();
 	void inicjalizacja_rs();
+	void rozmiar_x(const float x_width);
 	void zmien_pozycje(const sf::Vector2f position);
 	void zmien_pozycje(const float x, const float y);
 

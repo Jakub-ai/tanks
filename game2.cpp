@@ -55,7 +55,7 @@ void game2::zegarek()
 
 void game2::updateEvents()
 {
-
+	this->is_paused = 0;
 	while (this->window->pollEvent(this->gevent))
 	{
 		switch (this->gevent.type)
@@ -72,6 +72,13 @@ void game2::updateEvents()
 				this->gracz1->rotacja1(1.f);
 			if (this->gevent.key.code == sf::Keyboard::A)
 				this->gracz1->rotacja1(-1.f);
+			if (this->gevent.key.code == sf::Keyboard::P)
+			{
+				this->is_paused = 1;
+				if (this->gevent.key.code == sf::Keyboard::P)
+					this->is_paused = 0;
+			}
+				
 			break;
 		}
 	}
@@ -161,6 +168,21 @@ void game2::updateEvents()
 
 	//strzelanie
 
+	for (int i = 0; i < 125; i++)
+	{
+		if (this->oponent->x_axis.getGlobalBounds().intersects(this->przeszkoda1->spriteP[i].getGlobalBounds()))
+		{
+			this->oponent->rozmiar_x(this->oponent->pozycja().left - this->przeszkoda1->spriteP[i].getGlobalBounds().left);
+			break;
+		}
+		else if (!this->oponent->x_axis.getGlobalBounds().intersects(this->przeszkoda1->spriteP[i].getGlobalBounds()))
+		{
+			this->oponent->rozmiar_x(2000);
+		}
+	}
+
+
+
 	if (this->gracz1->pozycja1().intersects(this->oponent->y_axis.getGlobalBounds()) && this->oponent->canAttack() && this->oponent->jaki_kat() == 0)
 	{
 		this->bullets.push_back(new bullet(this->tekstury["BULLET"], this->oponent->pos().x - 5, this->oponent->pos().y - 25, 0.f, -1.f, 5.f));
@@ -230,27 +252,6 @@ void game2::updateEvents()
 			
 	}
 
-
-	/*if (player.x == opponent.x) {
-		if (opponent.angle != <pointing at the player>) {
-			opponent.rotate(<towards player>);
-		}
-		else {
-			<fire a bullet>
-		}
-	}
-	else {
-		if (opponent.angle != <default angle>) {
-			opponent.rotate(<back to default>);
-		}
-		else {
-			opponent.move();
-		}
-	}*/
-
-
-	
-
 }
 
 void game2::updateBullets()
@@ -286,14 +287,14 @@ void game2::updateBullets()
 
 void game2::update()
 {
-	this->zegarek();
-	this->updateEvents();
-	this->kolizjeP();
-	//this->kolizjeB();
-	this->kolizje();
-	this->updateBullets();
-	this->gracz1->update();
-	this->oponent->update();
+		this->zegarek();
+		this->updateEvents();
+		this->kolizjeP();
+		//this->kolizjeB();
+		this->kolizje();
+		this->updateBullets();
+		this->gracz1->update();
+		this->oponent->update();
 }
 
 void game2::updateMapy()
@@ -433,3 +434,4 @@ const bool game2::running() const
 {
 	return this->window->isOpen();
 }
+

@@ -55,7 +55,7 @@ void game::zegarek()
 
 void game::updateEvents()
 {
-
+	
 	while (this->window->pollEvent(this->gevent))
 	{
 		switch (this->gevent.type)

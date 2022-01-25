@@ -83,8 +83,6 @@ int main()
 					break;
 			}
 			if (event.key.code == Keyboard::Return) {
-				//tutaj mamy nasze opcje. po ich wyborze przechodzimy do ich zawartosci. Graj wiadomo, opcje no tu damy glosnosc aplikacji moze jeszcze nick wybor czolgu czy cos...
-				//w tworcach sie da imie i nazwisko plus kto co robil taki credits z filmu tylko bez xd
 
 				int x = mainMenu.MainMenuPressed();
 				if (x == 0)

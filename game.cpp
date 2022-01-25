@@ -42,6 +42,42 @@ void game::inicjalizacja_okna()
 	this->window->setVerticalSyncEnabled(false);
 }
 
+void game::GameOver1()
+{
+	this->go_window.setSize(sf::Vector2f(400, 300));
+	this->go_window.setPosition(550, 450);
+	this->go_window.setFillColor(sf::Color(0, 0, 0, 255));
+	this->go_window.setOrigin(sf::Vector2f(200, 150));
+
+	this->tekst0.setFont(font);
+	this->tekst0.setFillColor(sf::Color::White);
+	this->tekst0.setString("Press ESC To Quit");
+	this->tekst0.setPosition(430, 450);
+
+	this->tekst1.setFont(font);
+	this->tekst1.setFillColor(sf::Color::Yellow);
+	this->tekst1.setString("Player 1 WINS");
+	this->tekst1.setPosition(450, 350);
+}
+
+void game::GameOver2()
+{
+	this->go_window.setSize(sf::Vector2f(400, 300));
+	this->go_window.setPosition(550, 450);
+	this->go_window.setFillColor(sf::Color(0, 0, 0, 255));
+	this->go_window.setOrigin(sf::Vector2f(200, 150));
+
+	this->tekst0.setFont(font);
+	this->tekst0.setFillColor(sf::Color::White);
+	this->tekst0.setString("Press ESC To Quit");
+	this->tekst0.setPosition(430, 450);
+
+	this->tekst1.setFont(font);
+	this->tekst1.setFillColor(sf::Color::Yellow);
+	this->tekst1.setString("PLAYER 2 WINS");
+	this->tekst1.setPosition(450, 350);
+}
+
 void game::zegarek()
 {
 	this->czas = this->clock.restart();
@@ -202,9 +238,9 @@ void game::updateBullets()
 	for (auto* bullet : this->bullets)
 	{
 		if (bullet->pos().intersects(this->gracz2->pozycja2()))
-			this->window->close();
+			this->GameOver1();
 		if (bullet->pos().intersects(this->gracz1->pozycja1()))
-			this->window->close();
+			this->GameOver2();
 	}
 	
 	unsigned licznik = 0;
@@ -214,7 +250,7 @@ void game::updateBullets()
 		for (int i = 0; i < 125; i++)
 		{
 			//std::cout << "X: " << this->gracz2->pos2().x << " Y: " << this->gracz2->pos2().y << std::endl;
-			if (bullet->pos().top + bullet->pos().height <= 50.f || bullet->pos().top - bullet->pos().height >= 850.f || bullet->pos().left + bullet->pos().width <= 50.f || bullet->pos().left - bullet->pos().width >= 1050.f || bullet->pos().intersects(this->przeszkoda1->spriteP[i].getGlobalBounds()) || bullet->pos().intersects(this->gracz1->pozycja1()) || bullet->pos().intersects(this->gracz2->pozycja2()))
+			if (bullet->pos().top + bullet->pos().height <= 50.f || bullet->pos().top - bullet->pos().height >= 850.f || bullet->pos().left + bullet->pos().width <= 50.f || bullet->pos().left - bullet->pos().width >= 1050.f || bullet->pos().intersects(this->przeszkoda1->spriteP[i].getGlobalBounds()))
 			{
 				delete this->bullets.at(licznik);
 				this->bullets.erase(this->bullets.begin() + licznik);
@@ -371,6 +407,9 @@ void game::rysuj()
 	this->gracz2->rysuj2(*this->window);
 	this->przeszkoda1->rysuj(*this->window);
 	this->window->draw(this->zegar);
+	this->window->draw(this->go_window);
+	this->window->draw(this->tekst0);
+	this->window->draw(this->tekst1);
 	for (auto *bullet : this->bullets)
 	{
 		bullet->rysuj(*this->window); 

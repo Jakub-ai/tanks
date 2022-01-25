@@ -48,9 +48,18 @@ public:
 	sf::Clock clock;
 	sf::Time czas;
 	sf::Font font;
+	sf::Text tekst0;
+
+	sf::Text tekst1;
+
+	sf::Text tekst2;
+
+	sf::RectangleShape go_window;
 
 
 	//metody
+	void GameOver1();
+	void GameOver2();
 	void zegarek();
 	void updateEvents();
 	void update(); 

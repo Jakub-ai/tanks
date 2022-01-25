@@ -35,11 +35,40 @@ void game2::inicjalizacja_tekstur()
 	this->tekstury["BULLET"]->loadFromFile("Texture/bullet.png");
 }
 
+void game2::inicjalizacja_tekstu()
+{
+	if (!font.loadFromFile("Fonts/AlexandriaFLF.ttf"))
+	{
+		std::cout << "No Font HERE !!!";
+	}
+
+}
+
 void game2::inicjalizacja_okna()
 {
 	this->window = new sf::RenderWindow(sf::VideoMode(1440, 900), "Gra Tanki", sf::Style::Titlebar | sf::Style::Close);
 	this->window->setFramerateLimit(60);
 	this->window->setVerticalSyncEnabled(false);
+}
+
+void game2::GameOver()
+{
+
+	this->go_window.setSize(sf::Vector2f(400, 300));
+	this->go_window.setPosition(550,450);
+	this->go_window.setFillColor(sf::Color(0, 0, 0, 255));
+	this->go_window.setOrigin(sf::Vector2f(200, 150));
+
+	this->tekst0.setFont(font);
+	this->tekst0.setFillColor(sf::Color::White);
+	this->tekst0.setString("Press ESC To Quit");
+	this->tekst0.setPosition(430, 450);
+
+	this->tekst1.setFont(font);
+	this->tekst1.setFillColor(sf::Color::Red);
+	this->tekst1.setString("Game Over");
+	this->tekst1.setPosition(470, 350);
+
 }
 
 void game2::zegarek()
@@ -256,12 +285,15 @@ void game2::updateEvents()
 
 void game2::updateBullets()
 {
+
 	for (auto* bullet : this->bullets)
 	{
 		if (bullet->pos().intersects(this->gracz1->pozycja1()))
-			this->window->close();
-	}
+		{
+			this->GameOver();
 
+		}
+	}
 	unsigned licznik = 0;
 	for (auto* bullet : this->bullets)
 	{
@@ -269,8 +301,17 @@ void game2::updateBullets()
 		for (int i = 0; i < 125; i++)
 		{
 			//std::cout << "X: " << this->gracz2->pos2().x << " Y: " << this->gracz2->pos2().y << std::endl;
-			if (bullet->pos().top + bullet->pos().height <= 50.f || bullet->pos().top - bullet->pos().height >= 850.f || bullet->pos().left + bullet->pos().width <= 50.f || bullet->pos().left - bullet->pos().width >= 1050.f || bullet->pos().intersects(this->przeszkoda1->spriteP[i].getGlobalBounds()) || bullet->pos().intersects(this->gracz1->pozycja1()))
+			if (bullet->pos().top + bullet->pos().height <= 50.f || bullet->pos().top - bullet->pos().height >= 850.f || bullet->pos().left + bullet->pos().width <= 50.f || bullet->pos().left - bullet->pos().width >= 1050.f || bullet->pos().intersects(this->przeszkoda1->spriteP[i].getGlobalBounds()))
 			{
+				if (bullet->pos().intersects(this->gracz1->pozycja1()))
+				{
+					
+					delete this->bullets.at(licznik);
+					this->bullets.erase(this->bullets.begin() + licznik);
+					--licznik;
+					this->window->close();
+					break;
+				}
 				delete this->bullets.at(licznik);
 				this->bullets.erase(this->bullets.begin() + licznik);
 				--licznik;
@@ -288,6 +329,7 @@ void game2::updateBullets()
 void game2::update()
 {
 		this->zegarek();
+		//this->GameOver();
 		this->updateEvents();
 		this->kolizjeP();
 		//this->kolizjeB();
@@ -386,10 +428,14 @@ void game2::rysuj()
 	this->oponent->rysuj(*this->window);
 	this->przeszkoda1->rysuj(*this->window);
 	this->window->draw(this->zegar);
+	this->window->draw(this->go_window);
+	this->window->draw(this->tekst0);
+	this->window->draw(this->tekst1);
 	for (auto* bullet : this->bullets)
 	{
 		bullet->rysuj(*this->window);
 	}
+	
 	//std::cout << "Y pos: " << this->gracz1->pozycja().top << std::endl;
 
 
@@ -399,15 +445,14 @@ void game2::rysuj()
 
 game2::game2()
 {
-	if (!font.loadFromFile("Fonts/AlexandriaFLF.ttf")) {
-		cout << "No Font HERE !!!";
-	}
 
 	this->inicjalizacja_mapy();
 	this->inicjalizacja_zmiennych();
 	this->inicjalizacja_przeszkod();
 	this->inicjalizacja_gracza1();
 	this->inicjalizacja_tekstur();
+	this->inicjalizacja_tekstu();
+
 	//this->inicjalizacja_okna();
 }
 

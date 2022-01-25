@@ -26,15 +26,11 @@ void Czolg::inicjalizacja_sprite()
 	this->sprite2.setTexture(this->teksturka2);
 	this->sprite2.setPosition(1020.f, 700.f);
 	this->sprite2.setOrigin(13.f, 13.f);
-
-	
-
 }
 
 //konstrukor i destruktor
 Czolg::Czolg()
 {
-
 	this->inicjalizacja_gracza();
 	this->inicjalizacja_tekstur();
 	this->inicjalizacja_sprite();

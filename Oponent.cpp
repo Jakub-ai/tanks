@@ -52,12 +52,12 @@ void Oponent::inicjalizacja_rs()
 {
 	this->x_axis.setSize(sf::Vector2f(1600,2));
 	this->x_axis.setPosition(this->sprite.getPosition().x, this->sprite.getPosition().y);
-	this->x_axis.setFillColor(sf::Color(0,0,0,0));
+	this->x_axis.setFillColor(sf::Color(0,0,255,100));
 	this->x_axis.setOrigin(sf::Vector2f(800,1));
 
 	this->y_axis.setSize(sf::Vector2f(2,800));
 	this->y_axis.setPosition(this->sprite.getPosition().x, this->sprite.getPosition().y);
-	this->y_axis.setFillColor(sf::Color(0,0,0,0));
+	this->y_axis.setFillColor(sf::Color(0,0,255,100));
 	this->y_axis.setOrigin(sf::Vector2f(1, 400));
 }
 

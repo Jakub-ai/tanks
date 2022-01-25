@@ -27,7 +27,7 @@ private:
 	std::vector<bullet*> bullets;
 	bullet* pocisk;
 
-
+	
 	
 
 	void inicjalizacja_mapy();
@@ -35,6 +35,7 @@ private:
 	void inicjalizacja_gracza1();
 	void inicjalizacja_przeszkod();
 	void inicjalizacja_tekstur();
+	void inicjalizacja_tekstu();
 	void rysuj_mapke();
 
 
@@ -52,9 +53,14 @@ public:
 	sf::Clock clock;
 	sf::Time czas;
 	sf::Font font;
+	sf::Text tekst0;
+	sf::Text tekst1;
+	
+	sf::RectangleShape go_window;
 
 
 	//metody
+	void GameOver();
 	void zegarek();
 	void updateEvents();
 	void update();

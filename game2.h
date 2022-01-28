@@ -5,9 +5,13 @@
 #include "Oponent.h"
 #include <map>
 
+
+//game 2 odpowiada za gre player vs AI
+
 class game2
 {
 private:
+	//zmienne do tworzenia okna
 	sf::RenderWindow* window;
 	sf::Event gevent;
 
@@ -16,7 +20,7 @@ private:
 	sf::Sprite map_bg;
 	sf::Texture map_txt;
 
-
+	//obiekty do klas
 	Czolg* gracz1;
 
 	Oponent* oponent;

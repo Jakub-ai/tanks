@@ -15,6 +15,7 @@ private:
 	sf::Sprite map_bg;
 	sf::Texture map_txt;
 
+	//obiekty do klas
 
 	Czolg* gracz1;
 	Czolg* gracz2;

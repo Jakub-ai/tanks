@@ -40,6 +40,7 @@ Czolg::~Czolg()
 {
 
 }
+//zwraca pozycje boku/gory/dolu no granicy czolgu
 const sf::FloatRect Czolg::pozycja1() const
 {
 	return this->sprite1.getGlobalBounds();
@@ -48,7 +49,7 @@ const sf::FloatRect Czolg::pozycja2() const
 {
 	return this->sprite2.getGlobalBounds();
 }
-
+//zwraca pozycje x/y czolgu
 const sf::Vector2f& Czolg::pos1() const
 {
 	return this->sprite1.getPosition();
@@ -67,12 +68,6 @@ void Czolg::inicjalizacja_gracza()
 	this->AttackCD = this->AttackCD_Max;
 }
 
-/*
-const sf::FloatRect Czolg::czyDotyka() const
-{
-	this->przeszkoda
-}
-*/
 void Czolg::zmien_pozycje1(const sf::Vector2f position)
 {
 	this->sprite1.setPosition(position);
@@ -120,7 +115,7 @@ int Czolg::jaki_kat2()
 {
 	return this->sprite2.getRotation();
 }
-
+//cooldown sprzelania
 const bool Czolg::canAttack()
 {
 	if (this->AttackCD >= this->AttackCD_Max)
@@ -137,7 +132,7 @@ void Czolg::update()
 {
 	this->updateAttack();
 }
-
+//rowniez cooldown strzelania
 void Czolg::updateAttack()
 {
 	if(this->AttackCD<this->AttackCD_Max)

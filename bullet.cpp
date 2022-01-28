@@ -6,7 +6,7 @@
 bullet::bullet()
 {
 }
-
+//inicjowanie pocisku, przypisanie tekstury 
 bullet::bullet(sf::Texture *textureB, float pos_x, float pos_y, float dir_x, float dir_y, float move_speed)
 {
 	this->spriteB.setTexture(*textureB);
@@ -19,12 +19,12 @@ bullet::bullet(sf::Texture *textureB, float pos_x, float pos_y, float dir_x, flo
 bullet::~bullet()
 {
 }
-
+//zwraca pozycje pocisku
 const sf::FloatRect bullet::pos() const
 {
 	return this->spriteB.getGlobalBounds();
 }
-
+//odswiezanie pocisku
 void bullet::update()
 {
 	this->spriteB.move(this->MoveSpeed * this->direction);

@@ -2,7 +2,7 @@
 #include "mainMenu.h"
 #include "przeszkody.h"
 
-
+//game 2 odpowiada za gre player vs AI
 
 void game2::inicjalizacja_mapy()
 {
@@ -51,6 +51,7 @@ void game2::inicjalizacja_okna()
 	this->window->setVerticalSyncEnabled(false);
 }
 
+//okienko konczace gre
 void game2::GameOver()
 {
 
@@ -174,16 +175,6 @@ void game2::updateEvents()
 
 	// ruch oponenta
 
-	/*if (this->oponent->jaki_kat() == 0)
-	{
-		this->oponent->movement(0, -1.f);
-		this->oponent->movement_rs(0, -1.f);
-	}
-	if (this->oponent->jaki_kat() == 180)
-	{
-		this->oponent->movement(0, 1.f);
-		this->oponent->movement_rs(0, 1.f);
-	}*/
 
 	if (this->oponent->pozycja().top < 60.f)
 	{
@@ -195,7 +186,7 @@ void game2::updateEvents()
 		this->oponent->rotacja(2.f);
 	}
 
-	//strzelanie
+	//AI oponenta
 
 	for (int i = 0; i < 125; i++)
 	{
@@ -282,7 +273,7 @@ void game2::updateEvents()
 	}
 
 }
-
+//kolizja pociskow, usuwanie ich i zwalnianie pamieci
 void game2::updateBullets()
 {
 
@@ -325,7 +316,7 @@ void game2::updateBullets()
 
 }
 
-
+//odœwie¿anie wszystkiego
 void game2::update()
 {
 		this->zegarek();
@@ -456,6 +447,7 @@ game2::game2()
 	//this->inicjalizacja_okna();
 }
 
+//destruktor i usuwanie wszystkiego, zwalnianie pamieci
 game2::~game2()
 {
 	delete this->window;

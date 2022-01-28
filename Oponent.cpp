@@ -47,6 +47,7 @@ void Oponent::inicjalizacja_oponenta()
 	this->AttackCD = this->AttackCD_Max;
 	this->last_angle = 0;
 }
+//rs to rectangle shape czyli pole widzenia oponenta
 
 void Oponent::inicjalizacja_rs()
 {

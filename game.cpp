@@ -41,7 +41,7 @@ void game::inicjalizacja_okna()
 	this->window->setFramerateLimit(60);
 	this->window->setVerticalSyncEnabled(false);
 }
-
+//zakonczenie gry player 1 wyrgywa
 void game::GameOver1()
 {
 	this->go_window.setSize(sf::Vector2f(400, 300));
@@ -59,7 +59,7 @@ void game::GameOver1()
 	this->tekst1.setString("Player 1 WINS");
 	this->tekst1.setPosition(450, 350);
 }
-
+//zakonczenie gry player 2 wygrywa
 void game::GameOver2()
 {
 	this->go_window.setSize(sf::Vector2f(400, 300));
@@ -232,7 +232,7 @@ void game::updateEvents()
 		}
 	}
 }
-
+//kolizja pociskow, usuwanie ich i zwalnianie pamieci
 void game::updateBullets()
 {
 	for (auto* bullet : this->bullets)
@@ -265,7 +265,7 @@ void game::updateBullets()
 	
 }
 
-
+//odœwie¿anie wszystkiego
 void game::update()
 {
 	this->zegarek();
@@ -434,7 +434,7 @@ game::game()
 	this->inicjalizacja_tekstur();
 	//this->inicjalizacja_okna();
 }
-
+//destruktor i usuwanie wszystkiego, zwalnianie pamieci
 game::~game()
 {
 	delete this->window;
